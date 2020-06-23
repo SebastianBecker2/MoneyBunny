@@ -1,0 +1,464 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="TxtInput.Text" xml:space="preserve">
+    <value>erstellt am Blatt von
+Kontonummer
+Bitte beachten Sie die Hinweise auf der Rückseite!
+Bu-Tag
+Nr.
+K00037150
+0580
+000
+332565.019
+ 4/2020
+30.04.2020 22:00 1 5
+Kontokorrent
+Kontoauszug
+EUR-Konto
+Bankleitzahl / BIC
+551 900 00 / MVBMDE55
+Postfach 3069, 55020 Mainz
+Herrn
+Sebastian Becker
+Geißäckerstr. 30
+71111 Waldenbuch
+5M
+IBAN: DE42 5519 0000 0332 5650 19 BIC: MVBMDE55
+Ihr Kreditrahmen 5.700,00
+Ihr Berater: Simone Frölich
+ E-Mail: simone.froelich@mvb.de
+alter Kontostand vom 31.03.2020
+Wert Vorgang
+ 11.911,70 H
+01.04. 01.04. SEPA-BASISLASTSCHR. PN:931 9,19 S
+ HANSEMERKUR VERS.
+ 044326206A00016 01.04.2020 Krankenversicherung
+ EREF: 210736104 MREF: 044326206A00016 CRED: DE74ZZZ00
+ 000066149
+01.04. 01.04. Kartenzahlung girocard PN:931 15,37 S
+ REWE Andrea Fritz oHG
+ REWE SAGT DANKE. 45655561/Lorch/DE
+ 31.03.2020 um 14:02:48 Uhr 56023360/226690/ECTL/
+ 55190000/0332565019/1/1221
+01.04. 01.04. Kartenzahlung girocard PN:931 18,88 S
+ DANKE, IHR LIDL
+ DANKE, IHR LIDL/Lorch/DE
+ 31.03.2020 um 13:49:21 Uhr 60140789/029409/ECTL/
+ 55190000/0332565019/1/1221
+01.04. 01.04. Kartenzahlung girocard PN:931 66,49 S
+ Worldline Sweden AB
+ SHELL 7710/ Lorch/DE
+ 31.03.2020 um 13:17:26 Uhr 70000049/764184/CICC/FPIN
+ 55190000/0332565019/1/1221
+01.04. 01.04. SEPA-BASISLASTSCHR. PN:931 192,21 S
+ CONTINENTALE/EUROPA VERBUND
+ 140961006 HAFTPFL. 6,93 141606540 RENTE 160,4
+ 2 148270049 UNFALL 24,86 EREF: 012751399010195 MR
+ EF: R0100018618642 CRED: DE95ZZZ00000053646
+02.04. 02.04. SEPA-ÜBERWEISUNG PN:812 299,00 S
+ Rentpark24 GmbH
+ Rechnung Nr. RE-1042 Monatsmiete Opel Insignia TAN:716
+ 320 IBAN: DE24600603960082358001 BIC: GENODES1UTV
+06.04. 06.04. Kartenzahlung girocard PN:931 20,49 S
+ DANKE, IHR LIDL
+ DANKE, IHR LIDL/Lorch/DE
+ 04.04.2020 um 12:23:43 Uhr 60140792/215475/ECTL/
+ 55190000/0332565019/1/1221
+06.04. 06.04. Kartenzahlung girocard PN:931 24,56 S
+ REWE Andrea Fritz oHG
+ REWE SAGT DANKE. 45655561/Lorch/DE
+ 04.04.2020 um 12:36:39 Uhr 56023362/148129/ECTL/
+ Übertrag auf Blatt 2 11.265,51 H
+erstellt am Blatt von
+Kontonummer
+Bitte beachten Sie die Hinweise auf der Rückseite!
+Bu-Tag
+Nr.
+K00037150
+0580
+000
+332565.019
+ 4/2020
+30.04.2020 22:00 2 5
+Kontokorrent
+Kontoauszug
+EUR-Konto
+Bankleitzahl / BIC
+551 900 00 / MVBMDE55
+Sebastian Becker
+ Übertrag von Blatt 1 11.265,51 H
+Wert Vorgang
+ 55190000/0332565019/1/1221
+06.04. 06.04. Kartenzahlung girocard PN:931 36,97 S
+ OBI SAGT DANKE
+ OBI GMBH + CO. DEUT/WAIBLINGEN/DE
+ 04.04.2020 um 17:35:14 Uhr 65169031/167983/ECTL/NPIN
+ 55190000/0332565019/1/1221 REF 998371/260011
+06.04. 06.04. SEPA-BASISLASTSCHR. PN:931 58,00 S
+ E.ON Energie Deutschland
+ VK 232042394979 Zollgasse 2 Lorch ABSCHLAG 04 Strom WI
+ R SAGEN DANKE EREF: B387894057447 MREF: 20852HW2341438
+ CRED: DE41EON00000129793
+08.04. 08.04. SEPA-BASISLASTSCHR. PN:931 45,97 S
+ AMAZON PAYMENTS EUROPE S.C.A.
+ 302-2137823-9325961 AMZN Mktp DE 6G2GDZK249E4Q4X8 EREF
+ : 6G2GDZK249E4Q4X8 MREF: BPqQ?(?tZ0gtRkIjxOEVsD4Y17nZj
+ S CRED: DE94ZZZ00000561653
+09.04. 09.04. SEPA-BASISLASTSCHR. PN:5994 94,75 S
+ Verrechnungskonten Kundengesch.
+ VISA Abrechnung EREF: KKV55190000033256504300 MREF: DZ
+ 0580033256504320151105 CRED: DE42ZZZ00000000377
+14.04. 14.04. Kartenzahlung girocard PN:931 9,97 S
+ DANKE, IHR LIDL
+ DANKE, IHR LIDL/Lorch/DE
+ 09.04.2020 um 12:43:38 Uhr 60140792/217001/ECTL/
+ 55190000/0332565019/1/1221
+14.04. 14.04. SEPA-BASISLASTSCHR. PN:931 9,99 S
+ AMAZON DIGITAL GERMANY GMBH
+ D01-1860935-8600654 Prime Video 71ZIUA1KMMM2242Q EREF:
+ 71ZIUA1KMMM2242Q MREF: BPqQ?(?tZ0gtRkIjxOEVsD4Y17nZjS
+ CRED: DE96ZZZ00000594888
+14.04. 14.04. Kartenzahlung girocard PN:931 35,91 S
+ REWE Andrea Fritz oHG
+ REWE SAGT DANKE. 45655561/Lorch/DE
+ 09.04.2020 um 12:56:20 Uhr 56023361/226090/ECTL/NPIN
+ 55190000/0332565019/1/1221 REF 095310/260011
+14.04. 14.04. SEPA-ÜBERWEISUNG PN:812 296,99 S
+ MINDFACTORY AG
+ ID 3695952.VORGANG 7031561 GIROPAY0014400771SK8X09CY33
+ TAN:053295 IBAN: DE91282400230335633402 BIC: COBADEFF
+ XXX
+15.04. 15.04. SEPA-BASISLASTSCHR. PN:931 2,99 S
+ AMAZON DIGITAL GERMANY GMBH
+ D01-5506349-3371802 Prime Video 23G584JVONV7GR3C EREF:
+ 23G584JVONV7GR3C MREF: BPqQ?(?tZ0gtRkIjxOEVsD4Y17nZjS
+ CRED: DE96ZZZ00000594888
+15.04. 15.04. SEPA-BASISLASTSCHR. PN:931 3,98 S
+ AMAZON DIGITAL GERMANY GMBH
+ D01-8395773-4082224 Prime Video 4CWLCDE0EKR8JE88 EREF:
+ Übertrag auf Blatt 3 10.669,99 H
+erstellt am Blatt von
+Kontonummer
+Bitte beachten Sie die Hinweise auf der Rückseite!
+Bu-Tag
+Nr.
+K00037150
+0580
+000
+332565.019
+ 4/2020
+30.04.2020 22:00 3 5
+Kontokorrent
+Kontoauszug
+EUR-Konto
+Bankleitzahl / BIC
+551 900 00 / MVBMDE55
+Sebastian Becker
+ Übertrag von Blatt 2 10.669,99 H
+Wert Vorgang
+ 4CWLCDE0EKR8JE88 MREF: BPqQ?(?tZ0gtRkIjxOEVsD4Y17nZjS
+ CRED: DE96ZZZ00000594888
+15.04. 15.04. SEPA-BASISLASTSCHR. PN:931 3,99 S
+ AMAZON DIGITAL GERMANY GMBH
+ D01-4928740-8171800 Prime Video UQD3PXN6Z8EISL8Y EREF:
+ UQD3PXN6Z8EISL8Y MREF: BPqQ?(?tZ0gtRkIjxOEVsD4Y17nZjS
+ CRED: DE96ZZZ00000594888
+15.04. 15.04. SEPA-BASISLASTSCHR. PN:931 8,39 S
+ AMAZON EU S.A R.L., NIEDERLASSUNG DEUTSCHLAND
+ 302-4724618-9601943 Amazon.de 1CMS5RAA74AO4KWF EREF: 1
+ CMS5RAA74AO4KWF MREF: BPqQ?(?tZ0gtRkIjxOEVsD4Y17nZjS C
+ RED: DE24ZZZ00000561652
+15.04. 15.04. Kartenzahlung girocard PN:931 17,49 S
+ DANKE, IHR LIDL
+ DANKE, IHR LIDL/Lorch/DE
+ 14.04.2020 um 12:00:12 Uhr 60140791/102536/ECTL/NPIN
+ 55190000/0332565019/1/1221 REF 227430/260011
+15.04. 15.04. Kartenzahlung girocard PN:931 24,50 S
+ REWE Andrea Fritz oHG
+ REWE SAGT DANKE. 45655561/Lorch/DE
+ 14.04.2020 um 12:12:35 Uhr 56023361/226592/ECTL/NPIN
+ 55190000/0332565019/1/1221 REF 666700/260011
+15.04. 15.04. SEPA-BASISLASTSCHR. PN:931 29,95 S
+ SCHUFA Holding AG
+ Kunde:7002951492,Bestellung:0916895604,Rechnung:501006
+ 681579 MREF: 000004336838 CRED: DE87ZZZ00000239351
+20.04. 20.04. SEPA-BASISLASTSCHR. PN:931 11,99 S
+ NETFLIX INTERNATIONAL B.V.
+ Netflix Monthly Subscription EREF: 36993548927 MREF: D
+ D-864872819779146728-5681-150214 CRED: GB96NFXSDDCHAS0
+ 0000041302392
+20.04. 20.04. Kartenzahlung girocard PN:931 14,80 S
+ REWE Andrea Fritz oHG
+ REWE SAGT DANKE. 45655561/Lorch/DE
+ 18.04.2020 um 11:58:53 Uhr 56043479/000751/ECTL/
+ 55190000/0332565019/1/1221
+20.04. 20.04. Kartenzahlung girocard PN:931 17,18 S
+ DANKE, IHR LIDL
+ DANKE, IHR LIDL/Lorch/DE
+ 18.04.2020 um 11:45:28 Uhr 60140788/099627/ECTL/
+ 55190000/0332565019/1/1221
+20.04. 20.04. Kartenzahlung girocard PN:931 35,73 S
+ Worldline Sweden AB
+ SHELL 7710/ Lorch/DE
+ 17.04.2020 um 16:49:03 Uhr 70000049/771637/CICC/FPIN
+ 55190000/0332565019/1/1221 REF 847480/260011
+20.04. 20.04. SEPA-BASISLASTSCHR. PN:931 44,98 S
+ AMAZON PAYMENTS EUROPE S.C.A.
+ Übertrag auf Blatt 4 10.460,99 H
+erstellt am Blatt von
+Kontonummer
+Bitte beachten Sie die Hinweise auf der Rückseite!
+Bu-Tag
+Nr.
+K00037150
+0580
+000
+332565.019
+ 4/2020
+30.04.2020 22:00 4 5
+Kontokorrent
+Kontoauszug
+EUR-Konto
+Bankleitzahl / BIC
+551 900 00 / MVBMDE55
+Sebastian Becker
+ Übertrag von Blatt 3 10.460,99 H
+Wert Vorgang
+ 302-2272267-5445931 AMZN Mktp DE 4YECQQJ6NL9MRMH5 EREF
+ : 4YECQQJ6NL9MRMH5 MREF: BPqQ?(?tZ0gtRkIjxOEVsD4Y17nZj
+ S CRED: DE94ZZZ00000561653
+20.04. 20.04. Kartenzahlung girocard PN:931 119,70 S
+ BM Schwaebisch Gmu
+ TOOM BM SAGT DANKE 13563847/Schwaebisch Gmuend/DE
+ 17.04.2020 um 13:12:05 Uhr 56014686/336520/ECTL/NPIN
+ 55190000/0332565019/1/1221 REF 374026/260011
+23.04. 23.04. SEPA-ÜBERWEISUNG PN:812 750,00 S
+ Jeannine Hartmann
+ Übernahme von Möbel und Ausstattung TAN:153359 IBAN: D
+ E87553500100021159018 BIC: MALADE51WOR
+24.04. 24.04. LOHN/GEHALT/RENTE PN:931 3.482,40 H
+ LeuTek GmbH
+ Verdienstabrechnung 04.20/1 EREF: 20200416184037110000
+ 00003000000045
+24.04. 24.04. Kartenzahlung girocard PN:931 15,96 S
+ DANKE, IHR LIDL
+ DANKE, IHR LIDL/Lorch/DE
+ 23.04.2020 um 16:03:53 Uhr 60140788/101054/ECTL/
+ 55190000/0332565019/1/1221
+24.04. 24.04. Kartenzahlung girocard PN:931 20,29 S
+ REWE Andrea Fritz oHG
+ REWE SAGT DANKE. 45655561/Lorch/DE
+ 23.04.2020 um 16:16:38 Uhr 56023361/227793/ECTL/
+ 55190000/0332565019/1/1221
+24.04. 24.04. SEPA-ÜBERWEISUNG PN:812 1.530,00 S
+ Sebastian Becker
+ Kaution Waldenbuch TAN:229308 IBAN: DE6412030000106952
+ 1951 BIC: BYLADEM1001
+28.04. 28.04. SEPA-BASISLASTSCHR. PN:931 0,75 S
+ Telefonica Germany GmbH + Co. OHG
+ Kd-Nr.: 6001367485, Rg-Nr.: 1539739946/6, Ihre Tarifre
+ chnung EREF: 3103182149530001539739946006RCUR MREF: T0
+ 010001B000006001367485 CRED: DE9700000000142462
+28.04. 28.04. SEPA-BASISLASTSCHR. PN:931 3,99 S
+ AMAZON DIGITAL GERMANY GMBH
+ D01-5359673-1659825 Prime Video 2W5AR95YL0JU0QQD EREF:
+ 2W5AR95YL0JU0QQD MREF: BPqQ?(?tZ0gtRkIjxOEVsD4Y17nZjS
+ CRED: DE96ZZZ00000594888
+29.04. 29.04. SEPA-BASISLASTSCHR. PN:931 31,32 S
+ AMAZON EU S.A R.L., NIEDERLASSUNG DEUTSCHLAND
+ 302-8667761-1769124 Amazon.de 5XAD9QFMWPMZR5MI EREF: 5
+ XAD9QFMWPMZR5MI MREF: BPqQ?(?tZ0gtRkIjxOEVsD4Y17nZjS C
+ RED: DE24ZZZ00000561652
+29.04. 29.04. SEPA-BASISLASTSCHR. PN:931 143,98 S
+ AMAZON EU S.A R.L., NIEDERLASSUNG DEUTSCHLAND
+ 302-1265329-3065148 Amazon.de 208D3W0DSJWNN3SF EREF: 2
+ Übertrag auf Blatt 5 11.327,40 H
+erstellt am Blatt von
+Kontonummer
+Bitte beachten Sie die Hinweise auf der Rückseite!
+Bu-Tag
+Nr.
+K00037150
+0580
+000
+332565.019
+ 4/2020
+30.04.2020 22:00 5 5
+Kontokorrent
+Kontoauszug
+EUR-Konto
+Bankleitzahl / BIC
+551 900 00 / MVBMDE55
+Sebastian Becker
+ Übertrag von Blatt 4 11.327,40 H
+Wert Vorgang
+ 08D3W0DSJWNN3SF MREF: BPqQ?(?tZ0gtRkIjxOEVsD4Y17nZjS C
+ RED: DE24ZZZ00000561652
+30.04. 30.04. Kartenzahlung girocard PN:931 25,15 S
+ Worldline Sweden AB
+ SHELL 7710/ Lorch/DE
+ 29.04.2020 um 15:02:19 Uhr 70000049/776666/CICC/FPIN
+ 55190000/0332565019/1/1221
+30.04. 30.04. SEPA-BASISLASTSCHR. PN:931 29,99 S
+ 1u1 Telecom GmbH
+ KD-Nr. K545570776/ RG-Nr. 150619533851 EREF: 005232652
+ 759 MREF: 0200014765218 CRED: DE77ZZZ00000569719
+30.04. 30.04. DAUERAUFTRAG PN:900 880,00 S
+ Gianclaudio Sena
+ Mietzins Whg 1 in Geißäckerstraße 30 Waldenbuch /*DA-4
+ * IBAN: DE85700350005693045600 BIC: OLBODEH2700
+30.04. 30.04. DAUERAUFTRAG PN:900 1.000,00 S
+ Jutta Gutberlet
+ Miete Zollgasse 2, 73547 Lorch /*DA-3* IBAN: DE1861450
+ 0501000789595 BIC: OASPDE6AXXX
+ neuer Kontostand vom 30.04.2020 9.392,26 H
+ Morgen kann kommen.
+ Wir machen den Weg frei.
+Sehr geehrte Kundin, sehr geehrter Kunde,
+Sie haben eine Bankmitteilung erhalten, z. B. einen Kontoauszug, einen Sparkontoauszug oder eine Dividendenabrechnung. Bitte
+prüfen Sie diese genau: Ist alles korrekt? Falls nicht, sprechen Sie uns bitte an. Damit Sie immer gut informiert sind und wissen, wie
+Sie Ihre Bankmitteilung "richtig lesen", haben wir diese nützlichen Hinweise für Sie zusammengestellt:
+Falls umseitig Bankdienstleistungen aufgeführt sind, sind diese umsatzsteuerfrei - sofern nichts Abweichendes angegeben ist. Der
+im Kontoauszug ausgewiesene Betrag muss nicht dem tatsächlichen Kontoguthaben entsprechen, weil z. B. die Wertstellung
+einzelner Buchungen nicht berücksichtigt wurde oder noch Zinsen für eine Kontoüberziehung bei einer Verfügung anfallen können.
+Rechnungsabschlüsse
+Ihr Kontoauszug ist mit dem Hinweis "Rechnungsabschluss" versehen?
+Dann haben wir für Ihr Konto einen Rechnungsabschluss durchgeführt, einschließlich Zinsen und Entgelte. Alle weiteren, nach dem
+Erstellungsdatum dieser Mitteilung anfallenden Umsätze und Kontoauszüge werden erst in der folgenden Abrechnung
+berücksichtigt - auch wenn sie sich auf den Abrechnungssaldo des abgelaufenen Abrechnungszeitraumes auswirken.
+Korrekturen werden gekennzeichnet. Den Rechnungsabschluss können Sie beim Finanzamt vorlegen.
+Einwendungen
+Sie haben Einwendungen gegen den Rechnungsabschluss Ihres Kontokorrentkontos oder den Inhalt des Sparkontoauszugs? Dann
+haben Sie nach Erhalt sechs Wochen Zeit, uns schriftlich zu informieren. Sonst gilt der Rechnungsabschluss als genehmigt.
+Einzugsaufträge
+Einzugspapiere wie z. B. Schecks und Lastschriften werden unter dem Vorbehalt des Eingangs gutgeschrieben, und zwar auch
+dann, wenn diese Papiere bei uns selbst zahlbar sind.
+Schecks und Lastschriften sind erst eingelöst, wenn die Belastungsbuchung nicht spätestens am zweiten Bankarbeitstag - bei
+Lastschriften im SEPA-Firmen-Lastschriftverfahren nicht spätestens am dritten Bankarbeitstag - nach ihrer Vornahme rückgängig
+gemacht wird. Barschecks sind bereits mit Zahlung an den Scheckvorleger eingelöst. Schecks sind auch schon dann eingelöst,
+wenn wir im Einzelfall eine Bezahltmeldung absenden.
+Guthaben
+Ihr Guthaben ist durch das Einlagensicherungsgesetz gesichert und entschädigungsfähig. Nähere Informationen finden Sie im
+"Informationsbogen für den Einleger".
+Sie haben noch Fragen? Dann kontaktieren Sie uns bitte. Wir sind gern für Sie da.
+Mit freundlichen Grüßen
+Ihre Bank</value>
+  </data>
+</root>

@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyBunny", "MoneyBunny\MoneyBunny.csproj", "{BC94C647-B600-4166-B98E-58C91D92BAB7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cyotek.GhostScript.PdfConversion", "Cyotek.GhostScript.PdfConversion\Cyotek.GhostScript.PdfConversion.csproj", "{59BB29B1-BE36-4116-8F11-9E9446781D43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cyotek.GhostScript", "Cyotek.GhostScript\Cyotek.GhostScript.csproj", "{66780A35-8FD2-40D8-A647-6B7C6856C9EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{BC94C647-B600-4166-B98E-58C91D92BAB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC94C647-B600-4166-B98E-58C91D92BAB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC94C647-B600-4166-B98E-58C91D92BAB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59BB29B1-BE36-4116-8F11-9E9446781D43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59BB29B1-BE36-4116-8F11-9E9446781D43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59BB29B1-BE36-4116-8F11-9E9446781D43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59BB29B1-BE36-4116-8F11-9E9446781D43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66780A35-8FD2-40D8-A647-6B7C6856C9EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66780A35-8FD2-40D8-A647-6B7C6856C9EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66780A35-8FD2-40D8-A647-6B7C6856C9EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66780A35-8FD2-40D8-A647-6B7C6856C9EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
