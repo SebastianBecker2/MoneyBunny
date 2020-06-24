@@ -11,5 +11,6 @@ namespace MoneyBunny
         DirectDebit,
         CardPayment,
         Transfer,
+        StandingOrder,
     }
 }

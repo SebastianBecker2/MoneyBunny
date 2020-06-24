@@ -78,11 +78,44 @@ namespace MoneyBunny
             return SkipAfterString(index, " ", word_count);
         }
 
+        static DateTime ParseShortDate(string text, int index = 0)
+        {
+            return DateTime.ParseExact(text.Substring(0, 6), "dd.MM.", CultureInfo.InvariantCulture);
+        }
+
         DateTime ParseShortDate()
         {
             var date_string = FileContent.Substring(CurrentIndex, 6);
             CurrentIndex += 7;
-            return DateTime.ParseExact(date_string, "dd.MM.", CultureInfo.InvariantCulture);
+            return ParseShortDate(date_string);
+        }
+
+        static TransactionType ParseTransactionType(string text, int index = 0)
+        {
+            var end_of_type_index = text.IndexOf("PN:", index);
+            var type = text.Substring(index, (end_of_type_index - 1) - index);
+
+            if (type == "SEPA-BASISLASTSCHR.")
+            {
+                return TransactionType.DirectDebit;
+            }
+            else if (type == "Kartenzahlung girocard")
+            {
+                return TransactionType.CardPayment;
+            }
+            else if (type == "SEPA-ÜBERWEISUNG")
+            {
+                return TransactionType.Transfer;
+            }
+            else if (type == "LOHN/GEHALT/RENTE")
+            {
+                return TransactionType.Transfer;
+            }
+            else if (type == "DAUERAUFTRAG")
+            {
+                return TransactionType.StandingOrder;
+            }
+            throw new Exception("Unkown TransactionType: '" + type + "'");
         }
 
         TransactionType ParseTransactionType()
@@ -106,35 +139,30 @@ namespace MoneyBunny
             throw new Exception("Unkown TransactionType: '" + type + "'");
         }
 
-        void ParseTransaction()
+        void ParseTransactions(string transactions_text)
         {
-            int next_line_index = CurrentIndex;
-            var line = 0;
-            var transaction = new Transaction();
+            Transaction transaction = null;
 
-            do
+            foreach (var line in transactions_text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
             {
-                next_line_index = SkipLines(CurrentIndex, 1);
-                if (line == 0)
+                if (!line.StartsWith(" "))
                 {
-                    transaction.Date = ParseShortDate();
-                    ParseShortDate();
-                    transaction.Type = ParseTransactionType();
-                    CurrentIndex = SkipWords(CurrentIndex, 1);
-                    var index_after_value = SkipLines(CurrentIndex, 1);
-                    var amount = FileContent.Substring(CurrentIndex, index_after_value - CurrentIndex);
-                    transaction.Value = new MvbValue(amount);
-                }
-                else
-                {
-                    var end_of_line_index = SkipLines(CurrentIndex, 1);
-                    transaction.Reference += FileContent.Substring(CurrentIndex, end_of_line_index - CurrentIndex);
-                    CurrentIndex = end_of_line_index;
-                }
-                line++;
-            } while (FileContent[next_line_index] == ' ');
+                    transaction = new Transaction();
+                    Transactions.Add(transaction);
 
-            Transactions.Add(transaction);
+                    transaction.Date = ParseShortDate(line);
+                    transaction.Type = ParseTransactionType(line, 14);
+                    var index = line.IndexOf("PN:", 14);
+                    index = line.IndexOf(' ', index);
+                    transaction.Value = new MvbValue(line.Substring(index));
+                    continue;
+                }
+                if (!string.IsNullOrWhiteSpace(transaction.Reference))
+                {
+                    transaction.Reference += Environment.NewLine;
+                }
+                transaction.Reference += line.Trim();
+            }
         }
 
         int GetStartOfPage()
@@ -143,17 +171,6 @@ namespace MoneyBunny
             {
                 var index = FileContent.IndexOf(FirstPageStart, CurrentIndex);
                 index += FirstPageStart.Length;
-
-                // If we want the date:
-                //var date_string = FileContent.Substring(index + 1, 10);
-                //var from_date = DateTime.ParseExact(date_string, "dd.MM.yyyy", CultureInfo.InvariantCulture);
-
-                // If we want the value:
-                //var index_before_carryover = SkipLines(index, 2);
-                //var index_after_carryover = SkipLines(index_before_carryover, 1);
-                //var value = new MvbValue(FileContent.Substring(index_before_carryover, index_after_carryover - index_before_carryover));
-                //Carryover[CurrentPage] = value;
-
                 index = SkipLines(index, 3);
 
                 return index;
@@ -170,7 +187,7 @@ namespace MoneyBunny
                     throw new Exception("Carryover-Check failed on Page: " + CurrentPage + 1);
                 }
 
-                return SkipLines(index_after_carryover, 2);
+                return SkipLines(index_after_carryover, 1);
             }
         }
 
@@ -182,14 +199,16 @@ namespace MoneyBunny
             }
             else
             {
-                var index = FileContent.IndexOf(PageEnd, CurrentIndex) + PageEnd.Length + 2;
+                var index = FileContent.IndexOf(PageEnd, CurrentIndex);
+                var index_before_carryover = index + PageEnd.Length + 2;
 
-                var index_after_carryover = SkipLines(index, 1);
-                var value = new MvbValue(FileContent.Substring(index, index_after_carryover - index));
+                var index_after_carryover = SkipLines(index_before_carryover, 1);
+                var value_text = FileContent.Substring(index_before_carryover, index_after_carryover - index_before_carryover);
+                var value = new MvbValue(value_text);
 
                 Carryover[CurrentPage] = value;
 
-                return index_after_carryover;
+                return index;
             }
         }
 
@@ -214,17 +233,20 @@ namespace MoneyBunny
 
             PageCount = Regex.Matches(FileContent, PageEnd).Count + 1;
 
+            var transactions = "";
+
             foreach (var page in Enumerable.Range(0, PageCount))
             {
                 CurrentPage = page;
                 CurrentIndex = GetStartOfPage();
                 var end_of_page_pos = GetEndOfPage();
 
-                do
-                {
-                    ParseTransaction();
-                } while (CurrentIndex < end_of_page_pos);
+                transactions += FileContent.Substring(CurrentIndex, end_of_page_pos - CurrentIndex);
+                transactions = transactions.Trim(' ');
+
             }
+
+            ParseTransactions(transactions);
             return true;
         }
     }
