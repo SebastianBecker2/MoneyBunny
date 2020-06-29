@@ -35,6 +35,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.TxtInput = new System.Windows.Forms.TextBox();
             this.BtnProcessInput = new System.Windows.Forms.Button();
+            this.BtnImportAndProcess = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BtnImportFile
@@ -54,7 +55,7 @@
             this.TxtFilePath.Location = new System.Drawing.Point(90, 13);
             this.TxtFilePath.Name = "TxtFilePath";
             this.TxtFilePath.Size = new System.Drawing.Size(667, 20);
-            this.TxtFilePath.TabIndex = 1;
+            this.TxtFilePath.TabIndex = 6;
             this.TxtFilePath.Text = "D:\\Eigene Dateien\\Repos\\MoneyBunny\\MoneyBunny\\bin\\Debug\\332565019_2020_Nr.004_Kon" +
     "toauszug_vom_30.04.2020_20200604171629.pdf";
             // 
@@ -92,10 +93,20 @@
             this.BtnProcessInput.Location = new System.Drawing.Point(409, 374);
             this.BtnProcessInput.Name = "BtnProcessInput";
             this.BtnProcessInput.Size = new System.Drawing.Size(75, 23);
-            this.BtnProcessInput.TabIndex = 0;
+            this.BtnProcessInput.TabIndex = 2;
             this.BtnProcessInput.Text = "Process Input";
             this.BtnProcessInput.UseVisualStyleBackColor = true;
             this.BtnProcessInput.Click += new System.EventHandler(this.BtnProcessInput_Click);
+            // 
+            // BtnImportAndProcess
+            // 
+            this.BtnImportAndProcess.Location = new System.Drawing.Point(713, 375);
+            this.BtnImportAndProcess.Name = "BtnImportAndProcess";
+            this.BtnImportAndProcess.Size = new System.Drawing.Size(75, 23);
+            this.BtnImportAndProcess.TabIndex = 0;
+            this.BtnImportAndProcess.Text = "Go!";
+            this.BtnImportAndProcess.UseVisualStyleBackColor = true;
+            this.BtnImportAndProcess.Click += new System.EventHandler(this.BtnImportAndProcess_Click);
             // 
             // Form1
             // 
@@ -107,6 +118,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BtnSelectFile);
             this.Controls.Add(this.TxtFilePath);
+            this.Controls.Add(this.BtnImportAndProcess);
             this.Controls.Add(this.BtnImportFile);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -123,6 +135,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox TxtInput;
         private System.Windows.Forms.Button BtnProcessInput;
+        private System.Windows.Forms.Button BtnImportAndProcess;
     }
 }
 

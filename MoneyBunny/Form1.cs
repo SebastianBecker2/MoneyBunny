@@ -1,6 +1,4 @@
-﻿using Cyotek.GhostScript;
-using Cyotek.GhostScript.PdfConversion;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -10,6 +8,13 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Windows.Forms;
+using Docnet.Core;
+using Docnet.Core.Models;
+using Docnet.Core.Readers;
+using System.Runtime.InteropServices;
+using TikaOnDotNet.TextExtraction;
+using Toxy;
+using Toxy.Parsers;
 
 namespace MoneyBunny
 {
@@ -20,63 +25,42 @@ namespace MoneyBunny
             InitializeComponent();
         }
 
-        private string OcrTiffFile(string file)
+        private string GetTextFromPdfUsingToxy(string file_path)
         {
-            using (var engine = new Tesseract.TesseractEngine(@"./tessdata", "deu", Tesseract.EngineMode.Default))
-            using (var img = Tesseract.Pix.LoadFromFile(file))
-            using (var page = engine.Process(img))
-            {
-                return page.GetText();
-            }
+            var context = new ParserContext(file_path);
+            var parser = new PDFTextParser(context);
+            var content = parser.Parse();
+            return content.Replace("\n", "\r\n");
         }
 
-        IEnumerable<string> ConvertPdfToTiffGhostScript(string file)
+        private string GetTextFromPdfUsingTika(string file_path)
         {
-            var parent_folder = Path.GetDirectoryName(file);
-            var target = Path.Combine(parent_folder, Guid.NewGuid().ToString());
-            Directory.CreateDirectory(target);
+            var content = new TextExtractor().Extract(file_path).Text;
+            return content.Replace("\r\n\r\n", "\r\n");
+        }
 
-            var file_name = Path.GetFileNameWithoutExtension(file);
-
-            var settings = new Pdf2ImageSettings
+        private string GetTextFromPdfUsingDocNet(string file_path)
+        {
+            string text = "";
+            using (var library = DocLib.Instance)
+            using (var docReader = library.GetDocReader(file_path, new PageDimensions(1, 1)))
             {
-                // High anti aliasing seems to be the best for OCR
-                // Surprisingly no anti aliasing performs really bad
-                AntiAliasMode = AntiAliasMode.High,
-                // 250 seems to be the absolut sweet spot 
-                // Less or more reduces OCR quality significantly
-                Dpi = 250,
-                // Doesn't seem to impact the OCR quality
-                GridFitMode = GridFitMode.None,
-                // ImageFormats have not been tested
-                // But TiffMono should suffice
-                ImageFormat = Cyotek.GhostScript.ImageFormat.TiffMono,
-                // CropBox seems to be just as good
-                TrimMode = PdfTrimMode.TrimBox,
-            };
-            var converter = new Pdf2Image(file, settings);
-
-            return Enumerable.Range(0, converter.PageCount).Select(index =>
-            {
-                var output_file = Path.Combine(target, file_name + " (" + index.ToString("D5") + ").tiff");
-                converter.ConvertPdfPageToImage(output_file, index + 1);
-                return output_file;
-            });
+                foreach (var page_index in Enumerable.Range(0, docReader.GetPageCount()))
+                {
+                    using (var pageReader = docReader.GetPageReader(page_index))
+                    {
+                        text += pageReader.GetText();
+                    }
+                }
+            }
+            return text;
         }
 
         private void BtnImportFile_Click(object sender, EventArgs args)
         {
             var file_path = TxtFilePath.Text;
-
-            var file_contents = ConvertPdfToTiffGhostScript(file_path)
-                .AsParallel()
-                .AsOrdered()
-                .Select(file => OcrTiffFile(file));
-
-            foreach (var page in file_contents)
-            {
-                Debug.Print(page);
-            }
+            var file_content = GetTextFromPdfUsingToxy(file_path);
+            TxtInput.Text = file_content;
         }
 
         private void BtnSelectFile_Click(object sender, EventArgs e)
@@ -96,7 +80,17 @@ namespace MoneyBunny
         private void BtnProcessInput_Click(object sender, EventArgs e)
         {
             var parser = new MvbParser(TxtInput.Text);
-            parser.Parse();
+            if (!parser.Parse())
+            {
+                Debug.Print("Error parsing file");
+            }
+            Debug.Print("Found " + parser.Transactions.Count.ToString() + " Transaction");
+        }
+
+        private void BtnImportAndProcess_Click(object sender, EventArgs e)
+        {
+            BtnImportFile.PerformClick();
+            BtnProcessInput.PerformClick();
         }
     }
 }

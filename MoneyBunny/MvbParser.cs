@@ -171,8 +171,10 @@ namespace MoneyBunny
             {
                 var index = FileContent.IndexOf(FirstPageStart, CurrentIndex);
                 index += FirstPageStart.Length;
-                index = SkipLines(index, 3);
-
+                while (!char.IsDigit(FileContent[index]))
+                {
+                    index = SkipLines(index, 1);
+                }
                 return index;
             }
             else
