@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 namespace MoneyBunny
 {
     [DebuggerDisplay("{Date} {Type} {Value}")]
-    class Transaction
+    public class Transaction
     {
         public DateTime Date { get; set; }
-        public TransactionType Type { get; set; }
+        public string Type { get; set; }
         public string Reference { get; set; }
         public Value Value { get; set; }
     }

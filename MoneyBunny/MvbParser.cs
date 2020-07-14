@@ -90,53 +90,10 @@ namespace MoneyBunny
             return ParseShortDate(date_string);
         }
 
-        static TransactionType ParseTransactionType(string text, int index = 0)
+        static string ParseTransactionType(string text, int index = 0)
         {
             var end_of_type_index = text.IndexOf("PN:", index);
-            var type = text.Substring(index, (end_of_type_index - 1) - index);
-
-            if (type == "SEPA-BASISLASTSCHR.")
-            {
-                return TransactionType.DirectDebit;
-            }
-            else if (type == "Kartenzahlung girocard")
-            {
-                return TransactionType.CardPayment;
-            }
-            else if (type == "SEPA-ÜBERWEISUNG")
-            {
-                return TransactionType.Transfer;
-            }
-            else if (type == "LOHN/GEHALT/RENTE")
-            {
-                return TransactionType.Transfer;
-            }
-            else if (type == "DAUERAUFTRAG")
-            {
-                return TransactionType.StandingOrder;
-            }
-            throw new Exception("Unkown TransactionType: '" + type + "'");
-        }
-
-        TransactionType ParseTransactionType()
-        {
-            var end_of_type_index = FileContent.IndexOf("PN:", CurrentIndex);
-            var type = FileContent.Substring(CurrentIndex, (end_of_type_index - 1) - CurrentIndex);
-            CurrentIndex = end_of_type_index;
-
-            if (type == "SEPA-BASISLASTSCHR.")
-            {
-                return TransactionType.DirectDebit;
-            }
-            else if (type == "Kartenzahlung girocard")
-            {
-                return TransactionType.CardPayment;
-            }
-            else if (type == "SEPA-ÜBERWEISUNG")
-            {
-                return TransactionType.Transfer;
-            }
-            throw new Exception("Unkown TransactionType: '" + type + "'");
+            return text.Substring(index, (end_of_type_index - 1) - index);
         }
 
         void ParseTransactions(string transactions_text)

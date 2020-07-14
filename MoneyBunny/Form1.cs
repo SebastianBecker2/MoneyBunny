@@ -15,11 +15,25 @@ using System.Runtime.InteropServices;
 using TikaOnDotNet.TextExtraction;
 using Toxy;
 using Toxy.Parsers;
+using java.rmi.dgc;
+using MoneyBunny.Properties;
 
 namespace MoneyBunny
 {
     public partial class Form1 : Form
     {
+        public string BankStatementFolder
+        {
+            get
+            { return Settings.Default.BankStatementFolder; }
+            set
+            {
+                Settings.Default.BankStatementFolder = value; Settings.Default.Save();
+            }
+        }
+
+        public List<Transaction> Transactions = new List<Transaction>();
+
         public Form1()
         {
             InitializeComponent();
@@ -33,64 +47,89 @@ namespace MoneyBunny
             return content.Replace("\n", "\r\n");
         }
 
-        private string GetTextFromPdfUsingTika(string file_path)
-        {
-            var content = new TextExtractor().Extract(file_path).Text;
-            return content.Replace("\r\n\r\n", "\r\n");
-        }
-
-        private string GetTextFromPdfUsingDocNet(string file_path)
-        {
-            string text = "";
-            using (var library = DocLib.Instance)
-            using (var docReader = library.GetDocReader(file_path, new PageDimensions(1, 1)))
-            {
-                foreach (var page_index in Enumerable.Range(0, docReader.GetPageCount()))
-                {
-                    using (var pageReader = docReader.GetPageReader(page_index))
-                    {
-                        text += pageReader.GetText();
-                    }
-                }
-            }
-            return text;
-        }
-
-        private void BtnImportFile_Click(object sender, EventArgs args)
-        {
-            var file_path = TxtFilePath.Text;
-            var file_content = GetTextFromPdfUsingToxy(file_path);
-            TxtInput.Text = file_content;
-        }
-
         private void BtnSelectFile_Click(object sender, EventArgs e)
         {
             using (var dlg = new OpenFileDialog())
             {
+                dlg.InitialDirectory = BankStatementFolder;
                 dlg.Filter = "PDF|*.pdf";
-                dlg.InitialDirectory = Directory.GetCurrentDirectory();
                 if (dlg.ShowDialog() != DialogResult.OK)
                 {
                     return;
                 }
                 TxtFilePath.Text = dlg.FileName;
+                BankStatementFolder = Path.GetDirectoryName(dlg.FileName);
             }
-        }
-
-        private void BtnProcessInput_Click(object sender, EventArgs e)
-        {
-            var parser = new MvbParser(TxtInput.Text);
-            if (!parser.Parse())
-            {
-                Debug.Print("Error parsing file");
-            }
-            Debug.Print("Found " + parser.Transactions.Count.ToString() + " Transaction");
         }
 
         private void BtnImportAndProcess_Click(object sender, EventArgs e)
         {
-            BtnImportFile.PerformClick();
-            BtnProcessInput.PerformClick();
+            string[] file_paths;
+            using (var dlg = new OpenFileDialog())
+            {
+                dlg.InitialDirectory = BankStatementFolder;
+                dlg.Filter = "PDF|*.pdf";
+                dlg.Multiselect = true;
+                if (dlg.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+                BankStatementFolder = Path.GetDirectoryName(dlg.FileName);
+                file_paths= dlg.FileNames;
+            }
+
+            foreach (var file_path in file_paths)
+            {
+                var file_content = GetTextFromPdfUsingToxy(file_path);
+
+                var parser = new MvbParser(file_content);
+                if (!parser.Parse())
+                {
+                    Debug.Print("Error parsing file");
+                }
+                Debug.Print("Found " + parser.Transactions.Count.ToString() + " Transaction");
+                Transactions.AddRange(parser.Transactions);
+            }
+
+            DisplayTransactions(Transactions);
+        }
+
+        private void DisplayTransactions(IEnumerable<Transaction> transactions)
+        {
+            DgvTransaction.Rows.Clear();
+
+            foreach (var transaction in transactions)
+            {
+                var row = new DataGridViewRow();
+
+                row.Cells.Add(new DataGridViewCheckBoxCell());
+
+                var date = new DataGridViewTextBoxCell()
+                {
+                    Value = transaction.Date.ToString("d")
+                };
+                row.Cells.Add(date);
+
+                var type = new DataGridViewTextBoxCell()
+                {
+                    Value = transaction.Type
+                };
+                row.Cells.Add(type);
+
+                var reference = new DataGridViewTextBoxCell()
+                {
+                    Value = transaction.Reference
+                };
+                row.Cells.Add(reference);
+
+                var value = new DataGridViewTextBoxCell()
+                {
+                    Value = transaction.Value.ToString()
+                };
+                row.Cells.Add(value);
+
+                DgvTransaction.Rows.Add(row);
+            }
         }
     }
 }

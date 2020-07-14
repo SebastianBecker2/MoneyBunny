@@ -1,4 +1,5 @@
-﻿using System;
+﻿using com.sun.xml.@internal.fastinfoset.util;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -14,10 +15,22 @@ namespace MoneyBunny
     }
 
     [DebuggerDisplay("{Amount} {Sign}")]
-    class Value
-    {        
+    public class Value
+    {
         public int Amount;
         public Sign Sign;
+
+        public override string ToString()
+        {
+            if (Sign == Sign.Positive)
+            {
+                return string.Format("{0:N2} H", (double)Amount / 100);
+            }
+            else
+            {
+                return string.Format("{0:N2} S", (double)Amount / 100);
+            }
+        }
 
         public override bool Equals(object obj)
         {
