@@ -34,5 +34,17 @@ namespace MoneyBunny.Properties {
                 this["BankStatementFolder"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string StoredTransactions {
+            get {
+                return ((string)(this["StoredTransactions"]));
+            }
+            set {
+                this["StoredTransactions"] = value;
+            }
+        }
     }
 }

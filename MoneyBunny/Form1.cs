@@ -17,6 +17,8 @@ using Toxy;
 using Toxy.Parsers;
 using java.rmi.dgc;
 using MoneyBunny.Properties;
+using net.arnx.jsonic;
+using Newtonsoft.Json;
 
 namespace MoneyBunny
 {
@@ -32,11 +34,29 @@ namespace MoneyBunny
             }
         }
 
-        public List<Transaction> Transactions = new List<Transaction>();
+        public HashSet<Transaction> Transactions { get; set; }
+
+        private HashSet<Transaction> LoadStoredTransaction()
+        {
+            return JsonConvert.DeserializeObject<HashSet<Transaction>>(
+                Settings.Default.StoredTransactions);
+        }
+
+        private void StoreTransactions(IEnumerable<Transaction> transactions)
+        {
+            Settings.Default.StoredTransactions = JsonConvert.SerializeObject(transactions);
+            Settings.Default.Save();
+        }
 
         public Form1()
         {
             InitializeComponent();
+            Transactions = LoadStoredTransaction();
+            if (Transactions == null)
+            {
+                Transactions = new HashSet<Transaction>();
+            }
+            DisplayTransactions(Transactions);
         }
 
         private string GetTextFromPdfUsingToxy(string file_path)
@@ -75,7 +95,7 @@ namespace MoneyBunny
                     return;
                 }
                 BankStatementFolder = Path.GetDirectoryName(dlg.FileName);
-                file_paths= dlg.FileNames;
+                file_paths = dlg.FileNames;
             }
 
             foreach (var file_path in file_paths)
@@ -88,9 +108,11 @@ namespace MoneyBunny
                     Debug.Print("Error parsing file");
                 }
                 Debug.Print("Found " + parser.Transactions.Count.ToString() + " Transaction");
-                Transactions.AddRange(parser.Transactions);
+
+                Transactions.UnionWith(parser.Transactions);
             }
 
+            StoreTransactions(Transactions);
             DisplayTransactions(Transactions);
         }
 
