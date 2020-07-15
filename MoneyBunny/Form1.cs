@@ -34,6 +34,19 @@ namespace MoneyBunny
             }
         }
 
+        public ICollection<Category> Categories { get; set; }
+
+        private OrderedSet<Category> LoadCategories()
+        {
+            return JsonConvert.DeserializeObject<OrderedSet<Category>>(Settings.Default.Categories);
+        }
+
+        private void StoreCategories(IEnumerable<Category> categories)
+        {
+            Settings.Default.Categories = JsonConvert.SerializeObject(categories);
+            Settings.Default.Save();
+        }
+
         public HashSet<Transaction> Transactions { get; set; }
 
         private HashSet<Transaction> LoadStoredTransaction()
@@ -51,11 +64,19 @@ namespace MoneyBunny
         public Form1()
         {
             InitializeComponent();
+
+            Categories = LoadCategories();
+            if (Categories == null)
+            {
+                Categories = new OrderedSet<Category>();
+            }
+
             Transactions = LoadStoredTransaction();
             if (Transactions == null)
             {
                 Transactions = new HashSet<Transaction>();
             }
+
             DisplayTransactions(Transactions);
         }
 
@@ -120,7 +141,7 @@ namespace MoneyBunny
         {
             DgvTransaction.Rows.Clear();
 
-            foreach (var transaction in transactions)
+            foreach (var transaction in transactions.OrderBy(t => t.Date))
             {
                 var row = new DataGridViewRow();
 
@@ -151,6 +172,20 @@ namespace MoneyBunny
                 row.Cells.Add(value);
 
                 DgvTransaction.Rows.Add(row);
+            }
+        }
+
+        private void BtnManageCategories_Click(object sender, EventArgs e)
+        {
+            using (var dlg = new ManageCategories())
+            {
+                dlg.Categories = Categories;
+                if (dlg.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+                Categories = dlg.Categories;
+                StoreCategories(Categories);
             }
         }
     }

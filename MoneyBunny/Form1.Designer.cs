@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TxtFilePath = new System.Windows.Forms.TextBox();
             this.BtnSelectFile = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -40,6 +40,7 @@
             this.DgcType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgcReference = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgcValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BtnManageCategories = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DgvTransaction)).BeginInit();
             this.SuspendLayout();
             // 
@@ -131,25 +132,36 @@
             // DgcReference
             // 
             this.DgcReference.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgcReference.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgcReference.DefaultCellStyle = dataGridViewCellStyle1;
             this.DgcReference.HeaderText = "Reference";
             this.DgcReference.Name = "DgcReference";
             this.DgcReference.ReadOnly = true;
             // 
             // DgcValue
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.DgcValue.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.DgcValue.DefaultCellStyle = dataGridViewCellStyle2;
             this.DgcValue.HeaderText = "Value";
             this.DgcValue.Name = "DgcValue";
             this.DgcValue.ReadOnly = true;
+            // 
+            // BtnManageCategories
+            // 
+            this.BtnManageCategories.Location = new System.Drawing.Point(736, 395);
+            this.BtnManageCategories.Name = "BtnManageCategories";
+            this.BtnManageCategories.Size = new System.Drawing.Size(127, 23);
+            this.BtnManageCategories.TabIndex = 8;
+            this.BtnManageCategories.Text = "Manage Categories";
+            this.BtnManageCategories.UseVisualStyleBackColor = true;
+            this.BtnManageCategories.Click += new System.EventHandler(this.BtnManageCategories_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 430);
+            this.Controls.Add(this.BtnManageCategories);
             this.Controls.Add(this.DgvTransaction);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BtnSelectFile);
@@ -174,6 +186,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DgcType;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgcReference;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgcValue;
+        private System.Windows.Forms.Button BtnManageCategories;
     }
 }
 
