@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TxtFilePath = new System.Windows.Forms.TextBox();
             this.BtnSelectFile = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,22 +46,28 @@
             this.DgcCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CmbCategoryFilter = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.transactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearAllTransactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.DgvTransaction)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // TxtFilePath
             // 
             this.TxtFilePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TxtFilePath.Location = new System.Drawing.Point(90, 13);
+            this.TxtFilePath.Location = new System.Drawing.Point(91, 28);
             this.TxtFilePath.Name = "TxtFilePath";
-            this.TxtFilePath.Size = new System.Drawing.Size(823, 20);
+            this.TxtFilePath.Size = new System.Drawing.Size(498, 20);
             this.TxtFilePath.TabIndex = 6;
             // 
             // BtnSelectFile
             // 
             this.BtnSelectFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnSelectFile.Location = new System.Drawing.Point(919, 11);
+            this.BtnSelectFile.Location = new System.Drawing.Point(595, 26);
             this.BtnSelectFile.Name = "BtnSelectFile";
             this.BtnSelectFile.Size = new System.Drawing.Size(25, 23);
             this.BtnSelectFile.TabIndex = 2;
@@ -72,7 +78,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 16);
+            this.label1.Location = new System.Drawing.Point(13, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 13);
             this.label1.TabIndex = 3;
@@ -81,7 +87,7 @@
             // BtnImportAndProcess
             // 
             this.BtnImportAndProcess.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnImportAndProcess.Location = new System.Drawing.Point(869, 395);
+            this.BtnImportAndProcess.Location = new System.Drawing.Point(869, 490);
             this.BtnImportAndProcess.Name = "BtnImportAndProcess";
             this.BtnImportAndProcess.Size = new System.Drawing.Size(75, 23);
             this.BtnImportAndProcess.TabIndex = 0;
@@ -106,19 +112,19 @@
             this.DgcValue,
             this.DgcCategory});
             this.DgvTransaction.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.DgvTransaction.Location = new System.Drawing.Point(12, 67);
+            this.DgvTransaction.Location = new System.Drawing.Point(12, 55);
             this.DgvTransaction.Name = "DgvTransaction";
             this.DgvTransaction.ReadOnly = true;
             this.DgvTransaction.RowHeadersVisible = false;
             this.DgvTransaction.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvTransaction.Size = new System.Drawing.Size(932, 322);
+            this.DgvTransaction.Size = new System.Drawing.Size(932, 429);
             this.DgvTransaction.TabIndex = 7;
             this.DgvTransaction.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvTransaction_CellClick);
             // 
             // BtnManageCategories
             // 
             this.BtnManageCategories.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnManageCategories.Location = new System.Drawing.Point(736, 395);
+            this.BtnManageCategories.Location = new System.Drawing.Point(736, 490);
             this.BtnManageCategories.Name = "BtnManageCategories";
             this.BtnManageCategories.Size = new System.Drawing.Size(127, 23);
             this.BtnManageCategories.TabIndex = 8;
@@ -131,7 +137,7 @@
             this.CmbCategorySelection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.CmbCategorySelection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbCategorySelection.FormattingEnabled = true;
-            this.CmbCategorySelection.Location = new System.Drawing.Point(12, 395);
+            this.CmbCategorySelection.Location = new System.Drawing.Point(12, 490);
             this.CmbCategorySelection.Name = "CmbCategorySelection";
             this.CmbCategorySelection.Size = new System.Drawing.Size(219, 21);
             this.CmbCategorySelection.TabIndex = 9;
@@ -139,7 +145,7 @@
             // BtnApplyCategory
             // 
             this.BtnApplyCategory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.BtnApplyCategory.Location = new System.Drawing.Point(237, 395);
+            this.BtnApplyCategory.Location = new System.Drawing.Point(237, 490);
             this.BtnApplyCategory.Name = "BtnApplyCategory";
             this.BtnApplyCategory.Size = new System.Drawing.Size(106, 23);
             this.BtnApplyCategory.TabIndex = 10;
@@ -171,16 +177,16 @@
             // DgcReference
             // 
             this.DgcReference.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgcReference.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgcReference.DefaultCellStyle = dataGridViewCellStyle17;
             this.DgcReference.HeaderText = "Reference";
             this.DgcReference.Name = "DgcReference";
             this.DgcReference.ReadOnly = true;
             // 
             // DgcValue
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.DgcValue.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.DgcValue.DefaultCellStyle = dataGridViewCellStyle18;
             this.DgcValue.HeaderText = "Value";
             this.DgcValue.Name = "DgcValue";
             this.DgcValue.ReadOnly = true;
@@ -197,7 +203,7 @@
             this.CmbCategoryFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.CmbCategoryFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbCategoryFilter.FormattingEnabled = true;
-            this.CmbCategoryFilter.Location = new System.Drawing.Point(725, 40);
+            this.CmbCategoryFilter.Location = new System.Drawing.Point(725, 27);
             this.CmbCategoryFilter.Name = "CmbCategoryFilter";
             this.CmbCategoryFilter.Size = new System.Drawing.Size(219, 21);
             this.CmbCategoryFilter.TabIndex = 11;
@@ -205,18 +211,60 @@
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(687, 43);
+            this.label2.Location = new System.Drawing.Point(687, 30);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(32, 13);
             this.label2.TabIndex = 12;
             this.label2.Text = "Filter:";
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.transactionsToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(956, 24);
+            this.menuStrip1.TabIndex = 13;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // transactionsToolStripMenuItem
+            // 
+            this.transactionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearAllTransactionsToolStripMenuItem});
+            this.transactionsToolStripMenuItem.Name = "transactionsToolStripMenuItem";
+            this.transactionsToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
+            this.transactionsToolStripMenuItem.Text = "Transactions";
+            // 
+            // clearAllTransactionsToolStripMenuItem
+            // 
+            this.clearAllTransactionsToolStripMenuItem.Name = "clearAllTransactionsToolStripMenuItem";
+            this.clearAllTransactionsToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.clearAllTransactionsToolStripMenuItem.Text = "Clear all transactions";
+            this.clearAllTransactionsToolStripMenuItem.Click += new System.EventHandler(this.clearAllTransactionsToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(956, 430);
+            this.ClientSize = new System.Drawing.Size(956, 525);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.CmbCategoryFilter);
             this.Controls.Add(this.BtnApplyCategory);
@@ -227,9 +275,13 @@
             this.Controls.Add(this.BtnSelectFile);
             this.Controls.Add(this.TxtFilePath);
             this.Controls.Add(this.BtnImportAndProcess);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.DgvTransaction)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -252,6 +304,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DgcCategory;
         private System.Windows.Forms.ComboBox CmbCategoryFilter;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem transactionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearAllTransactionsToolStripMenuItem;
     }
 }
 

@@ -263,5 +263,17 @@ namespace MoneyBunny
         {
             DisplayTransactions(Transactions);
         }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void clearAllTransactionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Transactions.Clear();
+            StoreTransactions(Transactions);
+            DisplayTransactions(Transactions);
+        }
     }
 }
