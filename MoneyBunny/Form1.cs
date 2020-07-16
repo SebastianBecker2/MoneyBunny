@@ -71,6 +71,8 @@ namespace MoneyBunny
                 Categories = new OrderedSet<Category>();
             }
 
+            UpdateCategories(Categories);
+
             Transactions = LoadStoredTransaction();
             if (Transactions == null)
             {
@@ -145,7 +147,8 @@ namespace MoneyBunny
             {
                 var row = new DataGridViewRow();
 
-                row.Cells.Add(new DataGridViewCheckBoxCell());
+                var selection = new DataGridViewCheckBoxCell();
+                row.Cells.Add(selection);
 
                 var date = new DataGridViewTextBoxCell()
                 {
@@ -171,6 +174,15 @@ namespace MoneyBunny
                 };
                 row.Cells.Add(value);
 
+                var cat = Categories.FirstOrDefault(c => c.Id == transaction.CategoryId);
+                var category = new DataGridViewTextBoxCell()
+                {
+                    Value = cat?.Name
+                };
+                row.Cells.Add(category);
+
+                row.Tag = transaction;
+
                 DgvTransaction.Rows.Add(row);
             }
         }
@@ -185,8 +197,47 @@ namespace MoneyBunny
                     return;
                 }
                 Categories = dlg.Categories;
+
                 StoreCategories(Categories);
+                UpdateCategories(Categories);
             }
+        }
+
+        private void UpdateCategories(IEnumerable<Category> categories)
+        {
+            CmbCategories.Items.Clear();
+            CmbCategories.Items.AddRange(categories.Select(c => c.Name).ToArray());
+            CmbCategories.SelectedIndex = 0;
+        }
+
+        private void BtnApplyCategory_Click(object sender, EventArgs e)
+        {
+            var category = Categories.First(c => c.Name == CmbCategories.SelectedItem.ToString());
+
+            foreach (DataGridViewRow row in DgvTransaction.Rows)
+            {
+                var cell = row.Cells["DgcSelection"] as DataGridViewCheckBoxCell;
+                if (cell.Value == null || !(bool)cell.Value)
+                {
+                    continue;
+                }
+
+                var transaction = row.Tag as Transaction;
+                transaction.CategoryId = category.Id;
+            }
+
+            StoreTransactions(Transactions);
+            DisplayTransactions(Transactions);
+        }
+
+        private void DgvTransaction_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+            {
+                return;
+            }
+
+            DgvTransaction.Rows[e.RowIndex].Cells["DgcSelection"].Value = true;
         }
     }
 }

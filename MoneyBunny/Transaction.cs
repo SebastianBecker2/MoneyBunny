@@ -15,6 +15,7 @@ namespace MoneyBunny
         public string Type { get; set; }
         public string Reference { get; set; }
         public Value Value { get; set; }
+        public string CategoryId { get; set; }
 
         public override bool Equals(object obj)
         {

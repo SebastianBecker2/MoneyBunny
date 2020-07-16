@@ -28,19 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TxtFilePath = new System.Windows.Forms.TextBox();
             this.BtnSelectFile = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.BtnImportAndProcess = new System.Windows.Forms.Button();
             this.DgvTransaction = new System.Windows.Forms.DataGridView();
+            this.BtnManageCategories = new System.Windows.Forms.Button();
+            this.CmbCategories = new System.Windows.Forms.ComboBox();
+            this.BtnApplyCategory = new System.Windows.Forms.Button();
             this.DgcSelection = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.DgcDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgcType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgcReference = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgcValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BtnManageCategories = new System.Windows.Forms.Button();
+            this.DgcCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DgvTransaction)).BeginInit();
             this.SuspendLayout();
             // 
@@ -98,7 +101,8 @@
             this.DgcDate,
             this.DgcType,
             this.DgcReference,
-            this.DgcValue});
+            this.DgcValue,
+            this.DgcCategory});
             this.DgvTransaction.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.DgvTransaction.Location = new System.Drawing.Point(12, 39);
             this.DgvTransaction.Name = "DgvTransaction";
@@ -107,13 +111,45 @@
             this.DgvTransaction.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgvTransaction.Size = new System.Drawing.Size(932, 350);
             this.DgvTransaction.TabIndex = 7;
+            this.DgvTransaction.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvTransaction_CellClick);
+            // 
+            // BtnManageCategories
+            // 
+            this.BtnManageCategories.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnManageCategories.Location = new System.Drawing.Point(736, 395);
+            this.BtnManageCategories.Name = "BtnManageCategories";
+            this.BtnManageCategories.Size = new System.Drawing.Size(127, 23);
+            this.BtnManageCategories.TabIndex = 8;
+            this.BtnManageCategories.Text = "Manage Categories";
+            this.BtnManageCategories.UseVisualStyleBackColor = true;
+            this.BtnManageCategories.Click += new System.EventHandler(this.BtnManageCategories_Click);
+            // 
+            // CmbCategories
+            // 
+            this.CmbCategories.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CmbCategories.FormattingEnabled = true;
+            this.CmbCategories.Location = new System.Drawing.Point(12, 395);
+            this.CmbCategories.Name = "CmbCategories";
+            this.CmbCategories.Size = new System.Drawing.Size(219, 21);
+            this.CmbCategories.TabIndex = 9;
+            // 
+            // BtnApplyCategory
+            // 
+            this.BtnApplyCategory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnApplyCategory.Location = new System.Drawing.Point(237, 395);
+            this.BtnApplyCategory.Name = "BtnApplyCategory";
+            this.BtnApplyCategory.Size = new System.Drawing.Size(214, 23);
+            this.BtnApplyCategory.TabIndex = 10;
+            this.BtnApplyCategory.Text = "Apply Category to selected Transactions";
+            this.BtnApplyCategory.UseVisualStyleBackColor = true;
+            this.BtnApplyCategory.Click += new System.EventHandler(this.BtnApplyCategory_Click);
             // 
             // DgcSelection
             // 
             this.DgcSelection.HeaderText = "Selected";
             this.DgcSelection.Name = "DgcSelection";
             this.DgcSelection.ReadOnly = true;
-            this.DgcSelection.Width = 40;
+            this.DgcSelection.Width = 60;
             // 
             // DgcDate
             // 
@@ -132,35 +168,34 @@
             // DgcReference
             // 
             this.DgcReference.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgcReference.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgcReference.DefaultCellStyle = dataGridViewCellStyle3;
             this.DgcReference.HeaderText = "Reference";
             this.DgcReference.Name = "DgcReference";
             this.DgcReference.ReadOnly = true;
             // 
             // DgcValue
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.DgcValue.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.DgcValue.DefaultCellStyle = dataGridViewCellStyle4;
             this.DgcValue.HeaderText = "Value";
             this.DgcValue.Name = "DgcValue";
             this.DgcValue.ReadOnly = true;
             // 
-            // BtnManageCategories
+            // DgcCategory
             // 
-            this.BtnManageCategories.Location = new System.Drawing.Point(736, 395);
-            this.BtnManageCategories.Name = "BtnManageCategories";
-            this.BtnManageCategories.Size = new System.Drawing.Size(127, 23);
-            this.BtnManageCategories.TabIndex = 8;
-            this.BtnManageCategories.Text = "Manage Categories";
-            this.BtnManageCategories.UseVisualStyleBackColor = true;
-            this.BtnManageCategories.Click += new System.EventHandler(this.BtnManageCategories_Click);
+            this.DgcCategory.HeaderText = "Category";
+            this.DgcCategory.Name = "DgcCategory";
+            this.DgcCategory.ReadOnly = true;
+            this.DgcCategory.Width = 200;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 430);
+            this.Controls.Add(this.BtnApplyCategory);
+            this.Controls.Add(this.CmbCategories);
             this.Controls.Add(this.BtnManageCategories);
             this.Controls.Add(this.DgvTransaction);
             this.Controls.Add(this.label1);
@@ -181,12 +216,15 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button BtnImportAndProcess;
         private System.Windows.Forms.DataGridView DgvTransaction;
+        private System.Windows.Forms.Button BtnManageCategories;
+        private System.Windows.Forms.ComboBox CmbCategories;
+        private System.Windows.Forms.Button BtnApplyCategory;
         private System.Windows.Forms.DataGridViewCheckBoxColumn DgcSelection;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgcDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgcType;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgcReference;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgcValue;
-        private System.Windows.Forms.Button BtnManageCategories;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DgcCategory;
     }
 }
 
