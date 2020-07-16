@@ -143,7 +143,18 @@ namespace MoneyBunny
         {
             DgvTransaction.Rows.Clear();
 
-            foreach (var transaction in transactions.OrderBy(t => t.Date))
+            if (transactions == null)
+            {
+                return;
+            }
+
+            var category_filter_id = Categories
+                .FirstOrDefault(c => c.Name == CmbCategoryFilter.SelectedItem.ToString())
+                ?.Id;
+
+            foreach (var transaction in transactions
+                .Where(t => t.CategoryId == category_filter_id)
+                .OrderBy(t => t.Date))
             {
                 var row = new DataGridViewRow();
 
@@ -205,14 +216,19 @@ namespace MoneyBunny
 
         private void UpdateCategories(IEnumerable<Category> categories)
         {
-            CmbCategories.Items.Clear();
-            CmbCategories.Items.AddRange(categories.Select(c => c.Name).ToArray());
-            CmbCategories.SelectedIndex = 0;
+            CmbCategorySelection.Items.Clear();
+            CmbCategorySelection.Items.AddRange(categories.Select(c => c.Name).ToArray());
+            CmbCategorySelection.SelectedIndex = 0;
+
+            CmbCategoryFilter.Items.Clear();
+            CmbCategoryFilter.Items.Add("Uncategorized");
+            CmbCategoryFilter.Items.AddRange(categories.Select(c => c.Name).ToArray());
+            CmbCategoryFilter.SelectedIndex = 0;
         }
 
         private void BtnApplyCategory_Click(object sender, EventArgs e)
         {
-            var category = Categories.First(c => c.Name == CmbCategories.SelectedItem.ToString());
+            var category = Categories.First(c => c.Name == CmbCategorySelection.SelectedItem.ToString());
 
             foreach (DataGridViewRow row in DgvTransaction.Rows)
             {
@@ -237,7 +253,15 @@ namespace MoneyBunny
                 return;
             }
 
-            DgvTransaction.Rows[e.RowIndex].Cells["DgcSelection"].Value = true;
+            var cell = DgvTransaction.Rows[e.RowIndex].Cells["DgcSelection"];
+
+            var prev = cell.Value != null && (bool)cell.Value;
+            DgvTransaction.Rows[e.RowIndex].Cells["DgcSelection"].Value = !prev;
+        }
+
+        private void CmbCategoryFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DisplayTransactions(Transactions);
         }
     }
 }
