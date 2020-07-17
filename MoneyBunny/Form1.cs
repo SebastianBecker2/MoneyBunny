@@ -149,12 +149,19 @@ namespace MoneyBunny
                 return;
             }
 
-            var category_filter_id = Categories
-                .FirstOrDefault(c => c.Name == CmbCategoryFilter.SelectedItem.ToString())
-                ?.Id;
+            var category_filter_id = CmbCategoryFilter.SelectedItem.ToString();
+            if (category_filter_id != "Any")
+            {
+                // Category filter "Uncategorized" will translate to null.
+                // Which in turn will show uncategorized transactions,
+                // because those have null as their category_id.
+                category_filter_id = Categories
+                    .FirstOrDefault(c => c.Name == category_filter_id)
+                    ?.Id;
+            }
 
             foreach (var transaction in transactions
-                .Where(t => t.CategoryId == category_filter_id)
+                .Where(t => category_filter_id == "Any" || t.CategoryId == category_filter_id)
                 .OrderBy(t => t.Date))
             {
                 var row = new DataGridViewRow();
@@ -225,12 +232,10 @@ namespace MoneyBunny
             }
 
             CmbCategoryFilter.Items.Clear();
+            CmbCategoryFilter.Items.Add("Any");
             CmbCategoryFilter.Items.Add("Uncategorized");
             CmbCategoryFilter.Items.AddRange(categories.Select(c => c.Name).ToArray());
-            if (CmbCategoryFilter.Items.Count > 0)
-            {
-                CmbCategoryFilter.SelectedIndex = 0;
-            }
+            CmbCategoryFilter.SelectedIndex = 0;
         }
 
         private void BtnApplyCategory_Click(object sender, EventArgs e)
