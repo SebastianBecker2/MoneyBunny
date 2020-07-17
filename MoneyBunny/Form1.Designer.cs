@@ -28,22 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TxtFilePath = new System.Windows.Forms.TextBox();
             this.BtnSelectFile = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.BtnImportAndProcess = new System.Windows.Forms.Button();
             this.DgvTransaction = new System.Windows.Forms.DataGridView();
-            this.BtnManageCategories = new System.Windows.Forms.Button();
-            this.CmbCategorySelection = new System.Windows.Forms.ComboBox();
-            this.BtnApplyCategory = new System.Windows.Forms.Button();
             this.DgcSelection = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.DgcDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgcType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgcReference = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgcValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgcCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BtnManageCategories = new System.Windows.Forms.Button();
+            this.CmbCategorySelection = new System.Windows.Forms.ComboBox();
+            this.BtnApplyCategory = new System.Windows.Forms.Button();
             this.CmbCategoryFilter = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -51,6 +51,8 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearAllTransactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BtnStatistics = new System.Windows.Forms.Button();
+            this.BtnToDoList = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DgvTransaction)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -121,6 +123,51 @@
             this.DgvTransaction.TabIndex = 7;
             this.DgvTransaction.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvTransaction_CellClick);
             // 
+            // DgcSelection
+            // 
+            this.DgcSelection.HeaderText = "Selected";
+            this.DgcSelection.Name = "DgcSelection";
+            this.DgcSelection.ReadOnly = true;
+            this.DgcSelection.Width = 60;
+            // 
+            // DgcDate
+            // 
+            this.DgcDate.HeaderText = "Date";
+            this.DgcDate.Name = "DgcDate";
+            this.DgcDate.ReadOnly = true;
+            this.DgcDate.Width = 80;
+            // 
+            // DgcType
+            // 
+            this.DgcType.HeaderText = "Type";
+            this.DgcType.Name = "DgcType";
+            this.DgcType.ReadOnly = true;
+            this.DgcType.Width = 160;
+            // 
+            // DgcReference
+            // 
+            this.DgcReference.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgcReference.DefaultCellStyle = dataGridViewCellStyle1;
+            this.DgcReference.HeaderText = "Reference";
+            this.DgcReference.Name = "DgcReference";
+            this.DgcReference.ReadOnly = true;
+            // 
+            // DgcValue
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.DgcValue.DefaultCellStyle = dataGridViewCellStyle2;
+            this.DgcValue.HeaderText = "Value";
+            this.DgcValue.Name = "DgcValue";
+            this.DgcValue.ReadOnly = true;
+            // 
+            // DgcCategory
+            // 
+            this.DgcCategory.HeaderText = "Category";
+            this.DgcCategory.Name = "DgcCategory";
+            this.DgcCategory.ReadOnly = true;
+            this.DgcCategory.Width = 200;
+            // 
             // BtnManageCategories
             // 
             this.BtnManageCategories.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -152,51 +199,6 @@
             this.BtnApplyCategory.Text = "Apply to selected";
             this.BtnApplyCategory.UseVisualStyleBackColor = true;
             this.BtnApplyCategory.Click += new System.EventHandler(this.BtnApplyCategory_Click);
-            // 
-            // DgcSelection
-            // 
-            this.DgcSelection.HeaderText = "Selected";
-            this.DgcSelection.Name = "DgcSelection";
-            this.DgcSelection.ReadOnly = true;
-            this.DgcSelection.Width = 60;
-            // 
-            // DgcDate
-            // 
-            this.DgcDate.HeaderText = "Date";
-            this.DgcDate.Name = "DgcDate";
-            this.DgcDate.ReadOnly = true;
-            this.DgcDate.Width = 80;
-            // 
-            // DgcType
-            // 
-            this.DgcType.HeaderText = "Type";
-            this.DgcType.Name = "DgcType";
-            this.DgcType.ReadOnly = true;
-            this.DgcType.Width = 160;
-            // 
-            // DgcReference
-            // 
-            this.DgcReference.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgcReference.DefaultCellStyle = dataGridViewCellStyle17;
-            this.DgcReference.HeaderText = "Reference";
-            this.DgcReference.Name = "DgcReference";
-            this.DgcReference.ReadOnly = true;
-            // 
-            // DgcValue
-            // 
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.DgcValue.DefaultCellStyle = dataGridViewCellStyle18;
-            this.DgcValue.HeaderText = "Value";
-            this.DgcValue.Name = "DgcValue";
-            this.DgcValue.ReadOnly = true;
-            // 
-            // DgcCategory
-            // 
-            this.DgcCategory.HeaderText = "Category";
-            this.DgcCategory.Name = "DgcCategory";
-            this.DgcCategory.ReadOnly = true;
-            this.DgcCategory.Width = 200;
             // 
             // CmbCategoryFilter
             // 
@@ -241,7 +243,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -260,11 +262,35 @@
             this.clearAllTransactionsToolStripMenuItem.Text = "Clear all transactions";
             this.clearAllTransactionsToolStripMenuItem.Click += new System.EventHandler(this.clearAllTransactionsToolStripMenuItem_Click);
             // 
+            // BtnStatistics
+            // 
+            this.BtnStatistics.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnStatistics.Location = new System.Drawing.Point(603, 490);
+            this.BtnStatistics.Name = "BtnStatistics";
+            this.BtnStatistics.Size = new System.Drawing.Size(127, 23);
+            this.BtnStatistics.TabIndex = 14;
+            this.BtnStatistics.Text = "Show Statistics";
+            this.BtnStatistics.UseVisualStyleBackColor = true;
+            this.BtnStatistics.Click += new System.EventHandler(this.BtnStatistics_Click);
+            // 
+            // BtnToDoList
+            // 
+            this.BtnToDoList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnToDoList.Location = new System.Drawing.Point(470, 490);
+            this.BtnToDoList.Name = "BtnToDoList";
+            this.BtnToDoList.Size = new System.Drawing.Size(127, 23);
+            this.BtnToDoList.TabIndex = 15;
+            this.BtnToDoList.Text = "Show ToDo-List";
+            this.BtnToDoList.UseVisualStyleBackColor = true;
+            this.BtnToDoList.Click += new System.EventHandler(this.BtnToDoList_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 525);
+            this.Controls.Add(this.BtnToDoList);
+            this.Controls.Add(this.BtnStatistics);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.CmbCategoryFilter);
             this.Controls.Add(this.BtnApplyCategory);
@@ -309,6 +335,8 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem transactionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearAllTransactionsToolStripMenuItem;
+        private System.Windows.Forms.Button BtnStatistics;
+        private System.Windows.Forms.Button BtnToDoList;
     }
 }
 

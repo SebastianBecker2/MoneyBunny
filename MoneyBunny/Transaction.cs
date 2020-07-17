@@ -14,7 +14,7 @@ namespace MoneyBunny
         public DateTime Date { get; set; }
         public string Type { get; set; }
         public string Reference { get; set; }
-        public Value Value { get; set; }
+        public int Value { get; set; }
         public string CategoryId { get; set; }
 
         public override bool Equals(object obj)
@@ -23,7 +23,7 @@ namespace MoneyBunny
                    Date == transaction.Date &&
                    Type == transaction.Type &&
                    Reference == transaction.Reference &&
-                   EqualityComparer<Value>.Default.Equals(Value, transaction.Value);
+                   Value == transaction.Value;
         }
 
         public override int GetHashCode()
@@ -32,13 +32,13 @@ namespace MoneyBunny
             hashCode = hashCode * -1521134295 + Date.GetHashCode();
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Type);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Reference);
-            hashCode = hashCode * -1521134295 + EqualityComparer<Value>.Default.GetHashCode(Value);
+            hashCode = hashCode * -1521134295 + Value.GetHashCode();
             return hashCode;
         }
 
         public override string ToString()
         {
-            return Date.ToString("d") + " " + Value.ToString();
+            return Date.ToString("d") + " " + Value.ToValueString();
         }
 
         public static bool operator ==(Transaction left, Transaction right)

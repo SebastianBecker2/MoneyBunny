@@ -19,6 +19,7 @@ using java.rmi.dgc;
 using MoneyBunny.Properties;
 using net.arnx.jsonic;
 using Newtonsoft.Json;
+using ToDoManager;
 
 namespace MoneyBunny
 {
@@ -181,7 +182,7 @@ namespace MoneyBunny
 
                 var value = new DataGridViewTextBoxCell()
                 {
-                    Value = transaction.Value.ToString()
+                    Value = transaction.Value.ToValueString()
                 };
                 row.Cells.Add(value);
 
@@ -218,12 +219,18 @@ namespace MoneyBunny
         {
             CmbCategorySelection.Items.Clear();
             CmbCategorySelection.Items.AddRange(categories.Select(c => c.Name).ToArray());
-            CmbCategorySelection.SelectedIndex = 0;
+            if (CmbCategorySelection.Items.Count > 0)
+            {
+                CmbCategorySelection.SelectedIndex = 0;
+            }
 
             CmbCategoryFilter.Items.Clear();
             CmbCategoryFilter.Items.Add("Uncategorized");
             CmbCategoryFilter.Items.AddRange(categories.Select(c => c.Name).ToArray());
-            CmbCategoryFilter.SelectedIndex = 0;
+            if (CmbCategoryFilter.Items.Count > 0)
+            {
+                CmbCategoryFilter.SelectedIndex = 0;
+            }
         }
 
         private void BtnApplyCategory_Click(object sender, EventArgs e)
@@ -274,6 +281,24 @@ namespace MoneyBunny
             Transactions.Clear();
             StoreTransactions(Transactions);
             DisplayTransactions(Transactions);
+        }
+
+        private void BtnStatistics_Click(object sender, EventArgs e)
+        {
+            using (var dlg = new Statistics())
+            {
+                dlg.Transactions = Transactions;
+                dlg.Categories = Categories;
+                dlg.ShowDialog();
+            }
+        }
+
+        private void BtnToDoList_Click(object sender, EventArgs e)
+        {
+            using (var dlg = new ToDoManager.ToDoManager())
+            {
+                dlg.ShowDialog();
+            }
         }
     }
 }

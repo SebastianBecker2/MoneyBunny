@@ -15,31 +15,6 @@ namespace MoneyBunny
 {
     class MvbParser
     {
-        class MvbValue : Value
-        {
-            public MvbValue(string value_as_text)
-            {
-                var text = value_as_text.Trim(' ', '\r', '\n');
-
-                if (text.EndsWith(" S"))
-                {
-                    Sign = Sign.Negative;
-                }
-                else if (text.EndsWith(" H"))
-                {
-                    Sign = Sign.Positive;
-                }
-                else
-                {
-                    throw new ArgumentException("value format is invalid", nameof(value_as_text));
-                }
-
-                text = text.Trim(' ', 'S', 'H');
-                var new_amount = double.Parse(text, NumberStyles.Any, CultureInfo.GetCultureInfo("de-DE"));
-                Amount = (int)(new_amount * 100);
-            }
-        }
-
         private readonly static string FirstPageStart = "alter Kontostand vom";
         private readonly static string PageEnd = "Übertrag auf Blatt";
         private readonly static string PageStart = "Übertrag von Blatt";
@@ -52,7 +27,7 @@ namespace MoneyBunny
 
         public List<Transaction> Transactions = new List<Transaction>();
 
-        Dictionary<int, Value> Carryover = new Dictionary<int, Value>();
+        Dictionary<int, int> Carryover = new Dictionary<int, int>();
 
         public MvbParser(string file_content)
         {
@@ -90,6 +65,27 @@ namespace MoneyBunny
             return ParseShortDate(date_string);
         }
 
+        int ParseValue(string value_as_text)
+        {
+            var text = value_as_text.Trim(' ', '\r', '\n');
+
+            var amount_as_text = text.Trim(' ', 'S', 'H');
+            var amount = double.Parse(amount_as_text, NumberStyles.Any, CultureInfo.GetCultureInfo("de-DE"));
+
+            if (text.EndsWith(" S"))
+            {
+                return (int)(amount * -100);
+            }
+            else if (text.EndsWith(" H"))
+            {
+                return (int)(amount * 100);
+            }
+            else
+            {
+                throw new ArgumentException("value format is invalid", nameof(value_as_text));
+            }
+        }
+
         static string ParseTransactionType(string text, int index = 0)
         {
             var end_of_type_index = text.IndexOf("PN:", index);
@@ -111,7 +107,7 @@ namespace MoneyBunny
                     transaction.Type = ParseTransactionType(line, 14);
                     var index = line.IndexOf("PN:", 14);
                     index = line.IndexOf(' ', index);
-                    transaction.Value = new MvbValue(line.Substring(index));
+                    transaction.Value = ParseValue(line.Substring(index));
                     continue;
                 }
                 if (!string.IsNullOrWhiteSpace(transaction.Reference))
@@ -139,7 +135,7 @@ namespace MoneyBunny
                 var index = FileContent.IndexOf(PageStart, CurrentIndex) + PageStart.Length + 2;
 
                 var index_after_carryover = SkipLines(index, 1);
-                var value = new MvbValue(FileContent.Substring(index, index_after_carryover - index));
+                var value = ParseValue(FileContent.Substring(index, index_after_carryover - index));
 
                 if (Carryover[CurrentPage - 1] != value)
                 {
@@ -163,9 +159,8 @@ namespace MoneyBunny
 
                 var index_after_carryover = SkipLines(index_before_carryover, 1);
                 var value_text = FileContent.Substring(index_before_carryover, index_after_carryover - index_before_carryover);
-                var value = new MvbValue(value_text);
 
-                Carryover[CurrentPage] = value;
+                Carryover[CurrentPage] = ParseValue(value_text);
 
                 return index;
             }

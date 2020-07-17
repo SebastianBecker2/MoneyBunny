@@ -1,0 +1,22 @@
+[
+  {
+    "Done": false,
+    "Text": "Bug in parsing. Transactions have references of other transactions."
+  },
+  {
+    "Done": false,
+    "Text": "Make Transactions-List selection easier."
+  },
+  {
+    "Done": false,
+    "Text": "Display graph for statistics."
+  },
+  {
+    "Done": false,
+    "Text": "Automatic rules for categories."
+  },
+  {
+    "Done": false,
+    "Text": "Category filter for 'any'"
+  }
+]
