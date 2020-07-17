@@ -2,24 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Windows.Forms;
-using Docnet.Core;
-using Docnet.Core.Models;
-using Docnet.Core.Readers;
-using System.Runtime.InteropServices;
-using TikaOnDotNet.TextExtraction;
 using Toxy;
 using Toxy.Parsers;
-using java.rmi.dgc;
 using MoneyBunny.Properties;
-using net.arnx.jsonic;
 using Newtonsoft.Json;
-using ToDoManager;
 
 namespace MoneyBunny
 {
@@ -83,7 +72,7 @@ namespace MoneyBunny
             DisplayTransactions(Transactions);
         }
 
-        private string GetTextFromPdfUsingToxy(string file_path)
+        private string GetTextFromPdf(string file_path)
         {
             var context = new ParserContext(file_path);
             var parser = new PDFTextParser(context);
@@ -124,7 +113,7 @@ namespace MoneyBunny
 
             foreach (var file_path in file_paths)
             {
-                var file_content = GetTextFromPdfUsingToxy(file_path);
+                var file_content = GetTextFromPdf(file_path);
 
                 var parser = new MvbParser(file_content);
                 if (!parser.Parse())
