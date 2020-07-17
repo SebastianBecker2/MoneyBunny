@@ -5,10 +5,10 @@
   },
   {
     "Done": false,
-    "Text": "Make Transactions-List selection easier."
+    "Text": "Make transaction list selection easier."
   },
   {
-    "Done": false,
+    "Done": true,
     "Text": "Display graph for statistics."
   },
   {
@@ -18,5 +18,9 @@
   {
     "Done": true,
     "Text": "Category filter for 'any'"
+  },
+  {
+    "Done": false,
+    "Text": "Add more filters for transaction list"
   }
 ]

@@ -1,4 +1,5 @@
 ﻿using com.sun.tools.corba.se.idl.constExpr;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,6 +26,7 @@ namespace MoneyBunny
         protected override void OnLoad(EventArgs e)
         {
             DisplayStatistics();
+            //UpdateChart();
 
             base.OnLoad(e);
         }
@@ -33,7 +35,10 @@ namespace MoneyBunny
         {
             foreach (var category in Categories)
             {
-                var row = new DataGridViewRow();
+                var row = new DataGridViewRow()
+                {
+                    Tag = category,
+                };
 
                 var name = new DataGridViewTextBoxCell()
                 {
@@ -75,6 +80,41 @@ namespace MoneyBunny
                 .Where(t => t.Date.IsBetween(start_last_month, end_last_month))
                 .Where(t => t.CategoryId == category_id)
                 .Sum(t => t.Value);
+        }
+
+        private void UpdateChart(string category_id)
+        {
+            foreach (var series in ChtGraph.Series)
+            {
+                series.Points.Clear();
+            }
+
+            var monthly_sums = Transactions
+                .Where(t => t.CategoryId == category_id)
+                .GroupBy(t => t.Date.FirstDayOfMonth())
+                .OrderBy(g => g.Key)
+                .ToDictionary(g => g.Key.ToString("yyyy-MM"),
+                              g => (double)g.Sum(t => t.Value) / 100);
+
+            var monthly_avarage = (double)CalculateMonthlyAvarage(category_id) / 100;
+
+            foreach (var kvp in monthly_sums)
+            {
+                ChtGraph.Series["MonthlySums"].Points.AddXY(kvp.Key, kvp.Value);
+                ChtGraph.Series["MonthlyAvarage"].Points.AddXY(kvp.Key, monthly_avarage);
+            }
+        }
+
+        private void DgvStatistic_SelectionChanged(object sender, EventArgs e)
+        {
+            if (DgvStatistic.SelectedRows.Count != 1)
+            {
+                return;
+            }
+
+            var category = DgvStatistic.SelectedRows[0].Tag as Category;
+
+            UpdateChart(category.Id);
         }
     }
 }
