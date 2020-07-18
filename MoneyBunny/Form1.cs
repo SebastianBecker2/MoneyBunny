@@ -294,5 +294,13 @@ namespace MoneyBunny
                 dlg.ShowDialog();
             }
         }
+
+        private void removeCategoriesFromTransactionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (var transaction in Transactions)
+            {
+                transaction.CategoryId = null;
+            }
+        }
     }
 }
