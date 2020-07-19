@@ -1,6 +1,9 @@
-﻿using System;
+﻿using MoneyBunny.ExtensionMethods;
+using MoneyBunny.Rules;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using Point = System.Drawing.Point;
 
@@ -32,7 +35,7 @@ namespace MoneyBunny
             var categories = new OrderedSet<Category>();
             foreach (DataGridViewRow row in DgvCategories.Rows)
             {
-                var name = row.Cells["CategoryName"].Value as string;
+                var name = row.Cells["DgcName"].Value as string;
 
                 // Remove categories without name
                 if (name == null)
@@ -102,9 +105,9 @@ namespace MoneyBunny
 
                 // Create a rectangle using the DragSize, with the mouse position being
                 // at the center of the rectangle.
-                dragBoxFromMouseDown = new Rectangle(new Point(e.X - (dragSize.Width / 2),
-                                                               e.Y - (dragSize.Height / 2)),
-                                    dragSize);
+                dragBoxFromMouseDown = new Rectangle(
+                    new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)),
+                    dragSize);
             }
             else
                 // Reset the rectangle if the mouse is not over an item in the ListBox.
@@ -151,6 +154,52 @@ namespace MoneyBunny
                     DragDropEffects.Move);
                 }
             }
+        }
+
+        private void BtnAddCategory_Click(object sender, EventArgs e)
+        {
+            var row = new DataGridViewRow();
+            row.Cells.Add(new DataGridViewTextBoxCell());
+            DgvCategories.Rows.Add(row);
+        }
+
+        private void BtnRemoveCategory_Click(object sender, EventArgs e)
+        {
+            if (DgvCategories.SelectedRows.Count != 1)
+            {
+                return;
+            }
+
+            DgvCategories.Rows.Remove(DgvCategories.SelectedRows[0]);
+        }
+
+        private void btnRules_Click(object sender, EventArgs e)
+        {
+            if (DgvCategories.SelectedRows.Count != 1)
+            {
+                return;
+            }
+
+            var row = DgvCategories.SelectedRows[0];
+
+
+            using (var dlg = new ConfigureRules())
+            {
+                if (row.Tag == null)
+                {
+                    var cell = row.Cells["DgcName"] as DataGridViewTextBoxCell;
+                    row.Tag = Category.NewCategory(cell.Value.ToString());
+                }
+
+                dlg.Rules = (row.Tag as Category).Rules;
+
+                if (dlg.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+
+                (row.Tag as Category).Rules = dlg.Rules.ToList();
+            }  
         }
     }
 }

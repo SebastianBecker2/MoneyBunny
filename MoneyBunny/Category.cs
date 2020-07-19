@@ -1,21 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using MoneyBunny.Rules;
+using Newtonsoft.Json;
 
 namespace MoneyBunny
 {
     public class Category
     {
-        public static Category NewCategory(string name)
+        public static Category NewCategory(string name, IEnumerable<IRule> rules = null)
         {
             return new Category()
             {
                 Id = Guid.NewGuid().ToString(),
                 Name = name,
+                Rules = rules,
             };
         }
 
         public string Id { get; set; }
         public string Name { get; set; }
+        [JsonIgnore]
+        public IEnumerable<IRule> Rules { get; set; }
+
+        private Category()
+        {
+        }
+
+        public bool ApplyRules(Transaction transaction)
+        {
+            if (Rules == null)
+            {
+                return false;
+            }
+
+            return Rules.All(r => r.Apply(transaction));
+        }
 
         public override bool Equals(object obj)
         {

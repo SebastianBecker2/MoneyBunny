@@ -8,19 +8,35 @@
     "Text": "Make transaction list selection easier."
   },
   {
-    "Done": true,
-    "Text": "Display graph for statistics."
-  },
-  {
     "Done": false,
     "Text": "Automatic rules for categories."
   },
   {
-    "Done": true,
-    "Text": "Category filter for 'any'"
+    "Done": false,
+    "Text": "Add more filters for transaction list"
   },
   {
     "Done": false,
-    "Text": "Add more filters for transaction list"
+    "Text": "Fix compiler warning for version conflict of ICSharpCode.SharpZipLib"
+  },
+  {
+    "Done": false,
+    "Text": "Change Comparator from enum to class with subclass for IntComparator and StringComparator. (Rule::Comparator should return Comparator)"
+  },
+  {
+    "Done": false,
+    "Text": "Make ToDo Manager select existing json file"
+  },
+  {
+    "Done": false,
+    "Text": "Add saving of rules. Maybe time to move to DB. Using Json.Net is a bitch here."
+  },
+  {
+    "Done": true,
+    "Text": "Display graph for statistics."
+  },
+  {
+    "Done": true,
+    "Text": "Category filter for 'any'"
   }
 ]

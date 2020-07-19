@@ -9,6 +9,7 @@ using Toxy;
 using Toxy.Parsers;
 using MoneyBunny.Properties;
 using Newtonsoft.Json;
+using MoneyBunny.ExtensionMethods;
 
 namespace MoneyBunny
 {

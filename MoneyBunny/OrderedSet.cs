@@ -19,15 +19,9 @@ namespace MoneyBunny
             m_LinkedList = new LinkedList<T>();
         }
 
-        public int Count
-        {
-            get { return m_Dictionary.Count; }
-        }
+        public int Count => m_Dictionary.Count;
 
-        public virtual bool IsReadOnly
-        {
-            get { return m_Dictionary.IsReadOnly; }
-        }
+        public virtual bool IsReadOnly => m_Dictionary.IsReadOnly;
 
         void ICollection<T>.Add(T item)
         {

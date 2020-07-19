@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MoneyBunny
+namespace MoneyBunny.ExtensionMethods
 {
     public static class DateTimeExtension
     {

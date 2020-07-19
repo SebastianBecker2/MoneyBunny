@@ -1,4 +1,4 @@
-﻿namespace MoneyBunny
+﻿namespace MoneyBunny.ExtensionMethods
 {
     public static class ValueExtension
     {

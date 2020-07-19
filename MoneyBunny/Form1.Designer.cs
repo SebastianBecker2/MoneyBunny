@@ -51,9 +51,9 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearAllTransactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeCategoriesFromTransactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BtnStatistics = new System.Windows.Forms.Button();
             this.BtnToDoList = new System.Windows.Forms.Button();
-            this.removeCategoriesFromTransactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.DgvTransaction)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -176,7 +176,7 @@
             this.BtnManageCategories.Name = "BtnManageCategories";
             this.BtnManageCategories.Size = new System.Drawing.Size(127, 23);
             this.BtnManageCategories.TabIndex = 8;
-            this.BtnManageCategories.Text = "Manage Categories";
+            this.BtnManageCategories.Text = "Manage Categories...";
             this.BtnManageCategories.UseVisualStyleBackColor = true;
             this.BtnManageCategories.Click += new System.EventHandler(this.BtnManageCategories_Click);
             // 
@@ -244,7 +244,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -264,6 +264,13 @@
             this.clearAllTransactionsToolStripMenuItem.Text = "Clear all Transactions";
             this.clearAllTransactionsToolStripMenuItem.Click += new System.EventHandler(this.clearAllTransactionsToolStripMenuItem_Click);
             // 
+            // removeCategoriesFromTransactionsToolStripMenuItem
+            // 
+            this.removeCategoriesFromTransactionsToolStripMenuItem.Name = "removeCategoriesFromTransactionsToolStripMenuItem";
+            this.removeCategoriesFromTransactionsToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
+            this.removeCategoriesFromTransactionsToolStripMenuItem.Text = "Remove Categories from Transactions";
+            this.removeCategoriesFromTransactionsToolStripMenuItem.Click += new System.EventHandler(this.removeCategoriesFromTransactionsToolStripMenuItem_Click);
+            // 
             // BtnStatistics
             // 
             this.BtnStatistics.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -271,7 +278,7 @@
             this.BtnStatistics.Name = "BtnStatistics";
             this.BtnStatistics.Size = new System.Drawing.Size(127, 23);
             this.BtnStatistics.TabIndex = 14;
-            this.BtnStatistics.Text = "Show Statistics";
+            this.BtnStatistics.Text = "Show Statistics...";
             this.BtnStatistics.UseVisualStyleBackColor = true;
             this.BtnStatistics.Click += new System.EventHandler(this.BtnStatistics_Click);
             // 
@@ -282,16 +289,9 @@
             this.BtnToDoList.Name = "BtnToDoList";
             this.BtnToDoList.Size = new System.Drawing.Size(127, 23);
             this.BtnToDoList.TabIndex = 15;
-            this.BtnToDoList.Text = "Show ToDo-List";
+            this.BtnToDoList.Text = "Show ToDo-List...";
             this.BtnToDoList.UseVisualStyleBackColor = true;
             this.BtnToDoList.Click += new System.EventHandler(this.BtnToDoList_Click);
-            // 
-            // removeCategoriesFromTransactionsToolStripMenuItem
-            // 
-            this.removeCategoriesFromTransactionsToolStripMenuItem.Name = "removeCategoriesFromTransactionsToolStripMenuItem";
-            this.removeCategoriesFromTransactionsToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
-            this.removeCategoriesFromTransactionsToolStripMenuItem.Text = "Remove Categories from Transactions";
-            this.removeCategoriesFromTransactionsToolStripMenuItem.Click += new System.EventHandler(this.removeCategoriesFromTransactionsToolStripMenuItem_Click);
             // 
             // Form1
             // 
