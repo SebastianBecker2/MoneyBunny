@@ -14,34 +14,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropDownButton", "DropDownB
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug (x64)|Any CPU = Debug (x64)|Any CPU
 		Debug|Any CPU = Debug|Any CPU
-		DebugRunService|Any CPU = DebugRunService|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BC94C647-B600-4166-B98E-58C91D92BAB7}.Debug (x64)|Any CPU.ActiveCfg = Debug|Any CPU
-		{BC94C647-B600-4166-B98E-58C91D92BAB7}.Debug (x64)|Any CPU.Build.0 = Debug|Any CPU
 		{BC94C647-B600-4166-B98E-58C91D92BAB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BC94C647-B600-4166-B98E-58C91D92BAB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BC94C647-B600-4166-B98E-58C91D92BAB7}.DebugRunService|Any CPU.ActiveCfg = Debug|Any CPU
-		{BC94C647-B600-4166-B98E-58C91D92BAB7}.DebugRunService|Any CPU.Build.0 = Debug|Any CPU
 		{BC94C647-B600-4166-B98E-58C91D92BAB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC94C647-B600-4166-B98E-58C91D92BAB7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{678EBC3A-44FE-4325-85AA-866001164074}.Debug (x64)|Any CPU.ActiveCfg = Debug|Any CPU
-		{678EBC3A-44FE-4325-85AA-866001164074}.Debug (x64)|Any CPU.Build.0 = Debug|Any CPU
 		{678EBC3A-44FE-4325-85AA-866001164074}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{678EBC3A-44FE-4325-85AA-866001164074}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{678EBC3A-44FE-4325-85AA-866001164074}.DebugRunService|Any CPU.ActiveCfg = Debug|Any CPU
-		{678EBC3A-44FE-4325-85AA-866001164074}.DebugRunService|Any CPU.Build.0 = Debug|Any CPU
 		{678EBC3A-44FE-4325-85AA-866001164074}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{678EBC3A-44FE-4325-85AA-866001164074}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4C9E400C-64A7-4EA1-85B2-7A712108DA20}.Debug (x64)|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C9E400C-64A7-4EA1-85B2-7A712108DA20}.Debug (x64)|Any CPU.Build.0 = Debug|Any CPU
 		{4C9E400C-64A7-4EA1-85B2-7A712108DA20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4C9E400C-64A7-4EA1-85B2-7A712108DA20}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C9E400C-64A7-4EA1-85B2-7A712108DA20}.DebugRunService|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C9E400C-64A7-4EA1-85B2-7A712108DA20}.DebugRunService|Any CPU.Build.0 = Debug|Any CPU
 		{4C9E400C-64A7-4EA1-85B2-7A712108DA20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C9E400C-64A7-4EA1-85B2-7A712108DA20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
