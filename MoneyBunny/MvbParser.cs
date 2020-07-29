@@ -18,6 +18,8 @@ namespace MoneyBunny
         private string FileContent;
         private int PageCount = 0;
 
+        private int YearOfTransactions;
+
         public List<Transaction> Transactions = new List<Transaction>();
 
         Dictionary<int, int> Carryover = new Dictionary<int, int>();
@@ -46,9 +48,9 @@ namespace MoneyBunny
             return SkipAfterString(index, " ", word_count);
         }
 
-        static DateTime ParseShortDate(string text, int index = 0)
+        DateTime ParseShortDate(string text, int index = 0)
         {
-            return DateTime.ParseExact(text.Substring(0, 6), "dd.MM.", CultureInfo.InvariantCulture);
+            return ParseLongDate(text.Substring(index, 6) + YearOfTransactions.ToString());
         }
 
         DateTime ParseShortDate()
@@ -56,6 +58,18 @@ namespace MoneyBunny
             var date_string = FileContent.Substring(CurrentIndex, 6);
             CurrentIndex += 7;
             return ParseShortDate(date_string);
+        }
+
+        DateTime ParseLongDate(string text, int index = 0)
+        {
+            return DateTime.ParseExact(text.Substring(index, 10), "dd.MM.yyyy", CultureInfo.InvariantCulture);
+        }
+
+        DateTime ParseLongDate()
+        {
+            var date_string = FileContent.Substring(CurrentIndex, 10);
+            CurrentIndex += 11;
+            return ParseLongDate(date_string);
         }
 
         int ParseValue(string value_as_text)
@@ -117,6 +131,7 @@ namespace MoneyBunny
             {
                 var index = FileContent.IndexOf(FirstPageStart, CurrentIndex);
                 index += FirstPageStart.Length;
+                YearOfTransactions = ParseLongDate(FileContent.Substring(index + 1, 10)).Year;
                 while (!char.IsDigit(FileContent[index]))
                 {
                     index = SkipLines(index, 1);
