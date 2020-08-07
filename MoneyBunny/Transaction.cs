@@ -1,6 +1,7 @@
 ﻿using MoneyBunny.ExtensionMethods;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Diagnostics;
 
 namespace MoneyBunny
@@ -8,11 +9,12 @@ namespace MoneyBunny
     [DebuggerDisplay("{Date} {Type} {Value}")]
     public class Transaction
     {
+        public long? TransactionId { get; set; }
         public DateTime Date { get; set; }
         public string Type { get; set; }
         public string Reference { get; set; }
         public int Value { get; set; }
-        public string CategoryId { get; set; }
+        public long? CategoryId { get; set; }
 
         public override bool Equals(object obj)
         {

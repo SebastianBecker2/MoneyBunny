@@ -41,13 +41,13 @@ namespace MoneyBunny
 
                 var monthly_avarage = new DataGridViewTextBoxCell()
                 {
-                    Value = CalculateMonthlyAvarage(category.Id).ToValueString(),
+                    Value = CalculateMonthlyAvarage(category.CategoryId.Value).ToValueString(),
                 };
                 row.Cells.Add(monthly_avarage);
 
                 var last_month = new DataGridViewTextBoxCell()
                 {
-                    Value = CalculateLastMonth(category.Id).ToValueString(),
+                    Value = CalculateLastMonth(category.CategoryId.Value).ToValueString(),
                 };
                 row.Cells.Add(last_month);
 
@@ -55,7 +55,7 @@ namespace MoneyBunny
             }
         }
 
-        private int CalculateMonthlyAvarage(string category_id)
+        private int CalculateMonthlyAvarage(long category_id)
         {
             return (int)Transactions
                 .Where(t => t.CategoryId == category_id)
@@ -65,7 +65,7 @@ namespace MoneyBunny
                 .Average();
         }
 
-        private int CalculateLastMonth(string category_id)
+        private int CalculateLastMonth(long category_id)
         {
             var start_last_month = DateTime.Now.AddMonths(-1).FirstDayOfMonth();
             var end_last_month = DateTime.Now.AddMonths(-1).LastDayOfMonth();
@@ -75,7 +75,7 @@ namespace MoneyBunny
                 .Sum(t => t.Value);
         }
 
-        private void UpdateChart(string category_id)
+        private void UpdateChart(long category_id)
         {
             foreach (var series in ChtGraph.Series)
             {
@@ -107,7 +107,7 @@ namespace MoneyBunny
 
             var category = DgvStatistic.SelectedRows[0].Tag as Category;
 
-            UpdateChart(category.Id);
+            UpdateChart(category.CategoryId.Value);
         }
     }
 }

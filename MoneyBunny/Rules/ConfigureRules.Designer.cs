@@ -121,8 +121,10 @@
             // 
             // ConfigureRules
             // 
+            this.AcceptButton = this.BtnOkay;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.BtnCancel;
             this.ClientSize = new System.Drawing.Size(444, 305);
             this.Controls.Add(this.BtnAddRule);
             this.Controls.Add(this.BtnOkay);

@@ -12,18 +12,17 @@ namespace MoneyBunny
         {
             return new Category()
             {
-                Id = Guid.NewGuid().ToString(),
                 Name = name,
                 Rules = rules,
             };
         }
 
-        public string Id { get; set; }
+        public long? CategoryId { get; set; }
         public string Name { get; set; }
         [JsonIgnore]
         public IEnumerable<IRule> Rules { get; set; }
 
-        private Category()
+        public Category()
         {
         }
 
@@ -40,12 +39,12 @@ namespace MoneyBunny
         public override bool Equals(object obj)
         {
             return obj is Category category &&
-                   Id == category.Id;
+                   CategoryId == category.CategoryId;
         }
 
         public override int GetHashCode()
         {
-            return 2108858624 + EqualityComparer<string>.Default.GetHashCode(Id);
+            return 2108858624 + CategoryId.GetHashCode();
         }
 
         public static bool operator ==(Category left, Category right)

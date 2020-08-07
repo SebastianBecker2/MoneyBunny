@@ -99,7 +99,7 @@ namespace MoneyBunny.Rules
                     var type = r.Cells["DgcType"].Value.ToString();
                     var comparator = r.Cells["DgcComparator"].Value.ToString();
                     var value = r.Cells["DgcValues"].Value.ToString();
-                    return RuleExtensions.CreateRule(type, comparator, value);
+                    return Rule.CreateRule(type, comparator, value);
                 });
         }
 

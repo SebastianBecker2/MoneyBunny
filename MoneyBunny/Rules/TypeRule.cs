@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace MoneyBunny.Rules
 {
-    public class TypeRule : IRule
+    public class TypeRule : Rule
     {
         public IEnumerable<string> Keywords { get; }
 
-        public string ComparatorText => Type.GetComparators().First();
-        public string ValueText => string.Join(", ", Keywords);
-        public RuleType Type => RuleType.Type;
+        public override string ComparatorText => Type.GetComparators().First();
+        public override string ValueText => string.Join(", ", Keywords);
+        public override RuleType Type => RuleType.Type;
 
         public TypeRule(IEnumerable<string> keywords)
         {
@@ -23,7 +23,7 @@ namespace MoneyBunny.Rules
             }
         }
 
-        public bool Apply(Transaction transaction)
+        public override bool Apply(Transaction transaction)
         {
             return Keywords.Any(w => transaction.Type.Contains(w));
         }

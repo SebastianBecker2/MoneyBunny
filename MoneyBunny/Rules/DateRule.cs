@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace MoneyBunny.Rules
 {
-    public class DateRule : IRule
+    public class DateRule : Rule
     {
         public Comparator Comparator { get; }
         public DateTime Value { get; }
 
-        public string ComparatorText => Comparator.ToDisplayString();
-        public string ValueText => Value.ToString("d");
-        public RuleType Type => RuleType.Date;
+        public override string ComparatorText => Comparator.ToDisplayString();
+        public override string ValueText => Value.ToString("d");
+        public override RuleType Type => RuleType.Date;
 
         public DateRule(Comparator comparator, DateTime value)
         {
@@ -21,7 +21,7 @@ namespace MoneyBunny.Rules
             Value = value;
         }
 
-        public bool Apply(Transaction transaction)
+        public override bool Apply(Transaction transaction)
         {
             return Comparator.Apply(transaction.Date.Date, Value.Date);
         }

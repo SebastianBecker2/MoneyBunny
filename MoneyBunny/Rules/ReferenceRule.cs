@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace MoneyBunny.Rules
 {
-    public class ReferenceRule : IRule
+    public class ReferenceRule : Rule
     {
         public IEnumerable<string> Keywords { get; }
 
-        public string ComparatorText => Type.GetComparators().First();
-        public string ValueText => string.Join(", ", Keywords);
-        public RuleType Type => RuleType.Reference;
+        public override string ComparatorText => Type.GetComparators().First();
+        public override string ValueText => string.Join(", ", Keywords);
+        public override RuleType Type => RuleType.Reference;
 
         public ReferenceRule(IEnumerable<string> keywords)
         {
@@ -25,7 +25,7 @@ namespace MoneyBunny.Rules
             Keywords = keywords;
         }
 
-        public bool Apply(Transaction transaction)
+        public override bool Apply(Transaction transaction)
         {
             return Keywords.Any(w => transaction.Reference.Contains(w));
         }

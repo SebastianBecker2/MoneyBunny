@@ -38,5 +38,9 @@
   {
     "Done": true,
     "Text": "Category filter for 'any'"
+  },
+  {
+    "Done": false,
+    "Text": "Improve Transaction Dgv performance"
   }
 ]

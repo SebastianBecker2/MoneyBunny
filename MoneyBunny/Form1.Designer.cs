@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TxtFilePath = new System.Windows.Forms.TextBox();
             this.BtnSelectFile = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.BtnImportAndProcess = new System.Windows.Forms.Button();
-            this.DgvTransaction = new System.Windows.Forms.DataGridView();
+            this.DgvTransactions = new System.Windows.Forms.DataGridView();
             this.DgcSelection = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.DgcDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgcType = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,7 +54,9 @@
             this.removeCategoriesFromTransactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BtnStatistics = new System.Windows.Forms.Button();
             this.BtnToDoList = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.DgvTransaction)).BeginInit();
+            this.applyRulesToUncategorizedTransactionsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.applyRulesToAllTransactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvTransactions)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -98,31 +100,31 @@
             this.BtnImportAndProcess.UseVisualStyleBackColor = true;
             this.BtnImportAndProcess.Click += new System.EventHandler(this.BtnImportAndProcess_Click);
             // 
-            // DgvTransaction
+            // DgvTransactions
             // 
-            this.DgvTransaction.AllowUserToAddRows = false;
-            this.DgvTransaction.AllowUserToDeleteRows = false;
-            this.DgvTransaction.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.DgvTransactions.AllowUserToAddRows = false;
+            this.DgvTransactions.AllowUserToDeleteRows = false;
+            this.DgvTransactions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.DgvTransaction.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
-            this.DgvTransaction.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgvTransaction.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DgvTransactions.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            this.DgvTransactions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvTransactions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.DgcSelection,
             this.DgcDate,
             this.DgcType,
             this.DgcReference,
             this.DgcValue,
             this.DgcCategory});
-            this.DgvTransaction.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.DgvTransaction.Location = new System.Drawing.Point(12, 55);
-            this.DgvTransaction.Name = "DgvTransaction";
-            this.DgvTransaction.ReadOnly = true;
-            this.DgvTransaction.RowHeadersVisible = false;
-            this.DgvTransaction.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvTransaction.Size = new System.Drawing.Size(932, 429);
-            this.DgvTransaction.TabIndex = 7;
-            this.DgvTransaction.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvTransaction_CellClick);
+            this.DgvTransactions.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.DgvTransactions.Location = new System.Drawing.Point(12, 55);
+            this.DgvTransactions.Name = "DgvTransactions";
+            this.DgvTransactions.ReadOnly = true;
+            this.DgvTransactions.RowHeadersVisible = false;
+            this.DgvTransactions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DgvTransactions.Size = new System.Drawing.Size(932, 429);
+            this.DgvTransactions.TabIndex = 7;
+            this.DgvTransactions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvTransaction_CellClick);
             // 
             // DgcSelection
             // 
@@ -148,16 +150,16 @@
             // DgcReference
             // 
             this.DgcReference.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgcReference.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgcReference.DefaultCellStyle = dataGridViewCellStyle5;
             this.DgcReference.HeaderText = "Reference";
             this.DgcReference.Name = "DgcReference";
             this.DgcReference.ReadOnly = true;
             // 
             // DgcValue
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.DgcValue.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.DgcValue.DefaultCellStyle = dataGridViewCellStyle6;
             this.DgcValue.HeaderText = "Value";
             this.DgcValue.Name = "DgcValue";
             this.DgcValue.ReadOnly = true;
@@ -252,7 +254,9 @@
             // 
             this.transactionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.clearAllTransactionsToolStripMenuItem,
-            this.removeCategoriesFromTransactionsToolStripMenuItem});
+            this.removeCategoriesFromTransactionsToolStripMenuItem,
+            this.applyRulesToUncategorizedTransactionsToolStripMenuItem1,
+            this.applyRulesToAllTransactionsToolStripMenuItem});
             this.transactionsToolStripMenuItem.Name = "transactionsToolStripMenuItem";
             this.transactionsToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
             this.transactionsToolStripMenuItem.Text = "Transactions";
@@ -260,14 +264,14 @@
             // clearAllTransactionsToolStripMenuItem
             // 
             this.clearAllTransactionsToolStripMenuItem.Name = "clearAllTransactionsToolStripMenuItem";
-            this.clearAllTransactionsToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
+            this.clearAllTransactionsToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
             this.clearAllTransactionsToolStripMenuItem.Text = "Clear all Transactions";
             this.clearAllTransactionsToolStripMenuItem.Click += new System.EventHandler(this.clearAllTransactionsToolStripMenuItem_Click);
             // 
             // removeCategoriesFromTransactionsToolStripMenuItem
             // 
             this.removeCategoriesFromTransactionsToolStripMenuItem.Name = "removeCategoriesFromTransactionsToolStripMenuItem";
-            this.removeCategoriesFromTransactionsToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
+            this.removeCategoriesFromTransactionsToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
             this.removeCategoriesFromTransactionsToolStripMenuItem.Text = "Remove Categories from Transactions";
             this.removeCategoriesFromTransactionsToolStripMenuItem.Click += new System.EventHandler(this.removeCategoriesFromTransactionsToolStripMenuItem_Click);
             // 
@@ -293,6 +297,20 @@
             this.BtnToDoList.UseVisualStyleBackColor = true;
             this.BtnToDoList.Click += new System.EventHandler(this.BtnToDoList_Click);
             // 
+            // applyRulesToUncategorizedTransactionsToolStripMenuItem1
+            // 
+            this.applyRulesToUncategorizedTransactionsToolStripMenuItem1.Name = "applyRulesToUncategorizedTransactionsToolStripMenuItem1";
+            this.applyRulesToUncategorizedTransactionsToolStripMenuItem1.Size = new System.Drawing.Size(296, 22);
+            this.applyRulesToUncategorizedTransactionsToolStripMenuItem1.Text = "Apply Rules to uncategorized Transactions";
+            this.applyRulesToUncategorizedTransactionsToolStripMenuItem1.Click += new System.EventHandler(this.applyRulesToUncategorizedTransactionsToolStripMenuItem1_Click);
+            // 
+            // applyRulesToAllTransactionsToolStripMenuItem
+            // 
+            this.applyRulesToAllTransactionsToolStripMenuItem.Name = "applyRulesToAllTransactionsToolStripMenuItem";
+            this.applyRulesToAllTransactionsToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
+            this.applyRulesToAllTransactionsToolStripMenuItem.Text = "Apply Rules to all Transactions";
+            this.applyRulesToAllTransactionsToolStripMenuItem.Click += new System.EventHandler(this.applyRulesToAllTransactionsToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -305,7 +323,7 @@
             this.Controls.Add(this.BtnApplyCategory);
             this.Controls.Add(this.CmbCategorySelection);
             this.Controls.Add(this.BtnManageCategories);
-            this.Controls.Add(this.DgvTransaction);
+            this.Controls.Add(this.DgvTransactions);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BtnSelectFile);
             this.Controls.Add(this.TxtFilePath);
@@ -314,7 +332,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Money Bunny";
-            ((System.ComponentModel.ISupportInitialize)(this.DgvTransaction)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvTransactions)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -327,7 +345,7 @@
         private System.Windows.Forms.Button BtnSelectFile;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button BtnImportAndProcess;
-        private System.Windows.Forms.DataGridView DgvTransaction;
+        private System.Windows.Forms.DataGridView DgvTransactions;
         private System.Windows.Forms.Button BtnManageCategories;
         private System.Windows.Forms.ComboBox CmbCategorySelection;
         private System.Windows.Forms.Button BtnApplyCategory;
@@ -347,6 +365,8 @@
         private System.Windows.Forms.Button BtnStatistics;
         private System.Windows.Forms.Button BtnToDoList;
         private System.Windows.Forms.ToolStripMenuItem removeCategoriesFromTransactionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem applyRulesToUncategorizedTransactionsToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem applyRulesToAllTransactionsToolStripMenuItem;
     }
 }
 

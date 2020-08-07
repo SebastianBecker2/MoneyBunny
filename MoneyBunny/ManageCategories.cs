@@ -1,4 +1,5 @@
-﻿using MoneyBunny.ExtensionMethods;
+﻿using MoneyBunny.DataStore;
+using MoneyBunny.ExtensionMethods;
 using MoneyBunny.Rules;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace MoneyBunny
 {
     public partial class ManageCategories : Form
     {
-        public ICollection<Category> Categories { get; set; }
+        public List<Category> DeletedCategories { get; set; } = new List<Category>();
 
         public ManageCategories()
         {
@@ -32,46 +33,59 @@ namespace MoneyBunny
 
         private void UpdateCategories()
         {
-            var categories = new OrderedSet<Category>();
             foreach (DataGridViewRow row in DgvCategories.Rows)
             {
                 var name = row.Cells["DgcName"].Value as string;
 
+                if (name == null && row.Tag == null)
+                {
+                    continue;
+                }
+
                 // Remove categories without name
                 if (name == null)
                 {
+                    DeletedCategories.Add(row.Tag as Category);
                     continue;
                 }
 
                 // Add categories that didn't exist previously
                 if (row.Tag == null)
                 {
-                    if (name != null)
-                    {
-                        categories.Add(Category.NewCategory(name));
-                    }
+                    DataBase.InsertCategories(
+                        new[] { Category.NewCategory(name) });
+                    // Store rules to DB (inserting)
                     continue;
                 }
 
                 var category = row.Tag as Category;
 
+                // Add categories that didn't exist previously
+                // but got created by adding rules to it.
+                if (!category.CategoryId.HasValue)
+                {
+                    DataBase.InsertCategories(new[] { category });
+                }
+
                 // Override category name if necessary
                 if (category.Name != name)
                 {
                     category.Name = name;
+                    DataBase.UpdateCategoryName(new[] { category });
                 }
-
-                categories.Add(category);
             }
 
-            Categories = categories;
+            // Actually remove the categories that either
+            // - Had existed before and got their name removed
+            // - Had been removed using the remove button
+            DataBase.DeleteCategories(DeletedCategories);
         }
 
         private void DisplayCategories()
         {
             DgvCategories.Rows.Clear();
 
-            foreach (var category in Categories)
+            foreach (var category in DataBase.GetCategories())
             {
                 var row = new DataGridViewRow()
                 {
@@ -170,10 +184,17 @@ namespace MoneyBunny
                 return;
             }
 
-            DgvCategories.Rows.Remove(DgvCategories.SelectedRows[0]);
+            var row = DgvCategories.SelectedRows[0];
+            var category = row.Tag as Category;
+
+            if (category != null)
+            {
+                DeletedCategories.Add(category);
+            }
+            DgvCategories.Rows.Remove(row);
         }
 
-        private void btnRules_Click(object sender, EventArgs e)
+        private void BtnRules_Click(object sender, EventArgs e)
         {
             if (DgvCategories.SelectedRows.Count != 1)
             {
@@ -191,15 +212,29 @@ namespace MoneyBunny
                     row.Tag = Category.NewCategory(cell.Value.ToString());
                 }
 
-                dlg.Rules = (row.Tag as Category).Rules;
+                var category = (row.Tag as Category);
+                if (category.Rules == null
+                    && category.CategoryId.HasValue)
+                {
+                    category.Rules = DataBase.GetRules(
+                        DbFilter.WhereCategoryId,
+                        new[] { category.CategoryId.Value });
+                }
+
+                dlg.Rules = category.Rules;
 
                 if (dlg.ShowDialog() != DialogResult.OK)
                 {
                     return;
                 }
 
-                (row.Tag as Category).Rules = dlg.Rules.ToList();
-            }  
+                category.Rules = dlg.Rules.ToList();
+                if (category.CategoryId.HasValue)
+                {
+                    // Store rules to DB (updating)
+                    DataBase.UpdateCategoryRules(new[] { category });
+                }
+            }
         }
     }
 }

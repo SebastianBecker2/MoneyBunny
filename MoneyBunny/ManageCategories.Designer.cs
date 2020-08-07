@@ -34,7 +34,7 @@
             this.DgcName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BtnRemoveCategory = new System.Windows.Forms.Button();
             this.BtnAddCategory = new System.Windows.Forms.Button();
-            this.btnRules = new System.Windows.Forms.Button();
+            this.BtnRules = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DgvCategories)).BeginInit();
             this.SuspendLayout();
             // 
@@ -112,16 +112,16 @@
             this.BtnAddCategory.UseVisualStyleBackColor = true;
             this.BtnAddCategory.Click += new System.EventHandler(this.BtnAddCategory_Click);
             // 
-            // btnRules
+            // BtnRules
             // 
-            this.btnRules.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRules.Location = new System.Drawing.Point(12, 392);
-            this.btnRules.Name = "btnRules";
-            this.btnRules.Size = new System.Drawing.Size(101, 23);
-            this.btnRules.TabIndex = 9;
-            this.btnRules.Text = "Rules...";
-            this.btnRules.UseVisualStyleBackColor = true;
-            this.btnRules.Click += new System.EventHandler(this.btnRules_Click);
+            this.BtnRules.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.BtnRules.Location = new System.Drawing.Point(12, 392);
+            this.BtnRules.Name = "BtnRules";
+            this.BtnRules.Size = new System.Drawing.Size(101, 23);
+            this.BtnRules.TabIndex = 9;
+            this.BtnRules.Text = "Rules...";
+            this.BtnRules.UseVisualStyleBackColor = true;
+            this.BtnRules.Click += new System.EventHandler(this.BtnRules_Click);
             // 
             // ManageCategories
             // 
@@ -130,7 +130,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.BtnCancel;
             this.ClientSize = new System.Drawing.Size(353, 427);
-            this.Controls.Add(this.btnRules);
+            this.Controls.Add(this.BtnRules);
             this.Controls.Add(this.BtnRemoveCategory);
             this.Controls.Add(this.BtnAddCategory);
             this.Controls.Add(this.DgvCategories);
@@ -150,7 +150,7 @@
         private System.Windows.Forms.DataGridView DgvCategories;
         private System.Windows.Forms.Button BtnRemoveCategory;
         private System.Windows.Forms.Button BtnAddCategory;
-        private System.Windows.Forms.Button btnRules;
+        private System.Windows.Forms.Button BtnRules;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgcName;
     }
 }

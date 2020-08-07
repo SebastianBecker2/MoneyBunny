@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace MoneyBunny.Rules
 {
-    public class ValueRule : IRule
+    public class ValueRule : Rule
     {
         public Comparator Comparator { get; }
         public int Value { get; }
 
-        public string RuleText => RuleType.Value.ToDisplayString();
-        public string ComparatorText => Comparator.ToDisplayString();
-        public string ValueText => Value.ToValueString();
-        public RuleType Type => RuleType.Value;
+        //public override string ComparatorText { get { return Comparator.ToDisplayString(); } }
+        public override string ComparatorText => Comparator.ToDisplayString();
+        public override string ValueText => Value.ToValueString();
+        public override RuleType Type => RuleType.Value;
 
         public ValueRule(Comparator comparator, int value)
         {
@@ -24,7 +24,7 @@ namespace MoneyBunny.Rules
             Value = value;
         }
 
-        public bool Apply(Transaction transaction)
+        public override bool Apply(Transaction transaction)
         {
             return Comparator.Apply(transaction.Value, Value);
         }
