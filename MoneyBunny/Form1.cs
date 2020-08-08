@@ -8,10 +8,8 @@ using System.Windows.Forms;
 using Toxy;
 using Toxy.Parsers;
 using MoneyBunny.Properties;
-using Newtonsoft.Json;
 using MoneyBunny.ExtensionMethods;
 using MoneyBunny.DataStore;
-using DocumentFormat.OpenXml.Drawing.Charts;
 
 namespace MoneyBunny
 {

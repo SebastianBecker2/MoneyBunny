@@ -1,5 +1,4 @@
 ﻿using MoneyBunny.DataStore;
-using MoneyBunny.ExtensionMethods;
 using MoneyBunny.Rules;
 using System;
 using System.Collections.Generic;

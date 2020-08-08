@@ -1,16 +1,8 @@
-﻿using DocumentFormat.OpenXml.Drawing;
-using MoneyBunny.Rules;
-using MsgReader;
+﻿using MoneyBunny.Rules;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data.SQLite;
-using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MoneyBunny.DataStore
 {
