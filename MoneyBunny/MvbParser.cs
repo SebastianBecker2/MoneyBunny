@@ -150,7 +150,7 @@ namespace MoneyBunny
                     throw new Exception("Carryover-Check failed on Page: " + CurrentPage + 1);
                 }
 
-                return SkipLines(index_after_carryover, 1);
+                return index_after_carryover;
             }
         }
 
