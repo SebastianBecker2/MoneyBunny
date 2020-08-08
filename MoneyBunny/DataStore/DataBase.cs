@@ -34,7 +34,10 @@ namespace MoneyBunny.DataStore
     public class DataBase
     {
         private static readonly string DataStoreFileName = "DataStore.db";
-        private static string ConnectionString { get => $"URI=file:{DataStoreFileName};foreign keys=true"; }
+        private static string DataStoreFilePath 
+            => AppPaths.GetLocalAppPath(DataStoreFileName);
+        private static string ConnectionString
+            => $"URI=file:{DataStoreFilePath};foreign keys=true";
 
         private static bool IsInitialized = false;
 
@@ -61,22 +64,22 @@ namespace MoneyBunny.DataStore
             Func<string> id_string = () => string.Join(", ", ids.Select(id => id.ToString()));
             switch (filter)
             {
-            case DbFilter.All:
-                break;
-            case DbFilter.WhereNoCategory:
-                command.CommandText += " WHERE CategoryId IS NULL";
-                break;
-            case DbFilter.WhereCategoryId:
-                command.CommandText += " WHERE CategoryId in (@CategoryIds)";
-                command.Parameters.AddWithValue("@CategoryIds", id_string());
-                break;
-            case DbFilter.WhereTransactionId:
-                command.CommandText = " WHERE TransactionId in (@TransactionIds)";
-                command.Parameters.AddWithValue("@TransactionIds", id_string());
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(filter),
-                    "Selected filter is invalid for this query");
+                case DbFilter.All:
+                    break;
+                case DbFilter.WhereNoCategory:
+                    command.CommandText += " WHERE CategoryId IS NULL";
+                    break;
+                case DbFilter.WhereCategoryId:
+                    command.CommandText += " WHERE CategoryId in (@CategoryIds)";
+                    command.Parameters.AddWithValue("@CategoryIds", id_string());
+                    break;
+                case DbFilter.WhereTransactionId:
+                    command.CommandText = " WHERE TransactionId in (@TransactionIds)";
+                    command.Parameters.AddWithValue("@TransactionIds", id_string());
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(filter),
+                        "Selected filter is invalid for this query");
             }
         }
 
@@ -86,20 +89,20 @@ namespace MoneyBunny.DataStore
         {
             switch (order)
             {
-            case DbOrder.None:
-                break;
-            case DbOrder.ByDate:
-                command.CommandText += " ORDER BY Date";
-                break;
-            case DbOrder.ByDateDescending:
-                command.CommandText += " ORDER BY Date DESC";
-                break;
-            case DbOrder.ByValue:
-                command.CommandText += " ORDER BY Value";
-                break;
-            case DbOrder.ByValueDescending:
-                command.CommandText += " ORDER BY Value DESC";
-                break;
+                case DbOrder.None:
+                    break;
+                case DbOrder.ByDate:
+                    command.CommandText += " ORDER BY Date";
+                    break;
+                case DbOrder.ByDateDescending:
+                    command.CommandText += " ORDER BY Date DESC";
+                    break;
+                case DbOrder.ByValue:
+                    command.CommandText += " ORDER BY Value";
+                    break;
+                case DbOrder.ByValueDescending:
+                    command.CommandText += " ORDER BY Value DESC";
+                    break;
             }
         }
 

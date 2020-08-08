@@ -20,7 +20,7 @@
     "Text": "Make ToDo Manager select existing json file"
   },
   {
-    "Done": false,
+    "Done": true,
     "Text": "Add saving of rules. Maybe time to move to DB. Using Json.Net is a bitch here."
   },
   {
@@ -32,7 +32,7 @@
     "Text": "Check why Rules are not deleted when Catetories are"
   },
   {
-    "Done": false,
+    "Done": true,
     "Text": "Move DataBase to AppData"
   },
   {
