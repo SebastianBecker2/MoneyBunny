@@ -16,16 +16,20 @@
     "Text": "Change Comparator from enum to class with subclass for IntComparator and StringComparator. (Rule::Comparator should return Comparator)"
   },
   {
-    "Done": false,
-    "Text": "Make ToDo Manager select existing json file"
-  },
-  {
     "Done": true,
-    "Text": "Add saving of rules. Maybe time to move to DB. Using Json.Net is a bitch here."
+    "Text": "Make ToDo Manager select existing json file"
   },
   {
     "Done": false,
     "Text": "Improve Transaction Dgv performance"
+  },
+  {
+    "Done": false,
+    "Text": "Error in X-Axis of statistic of rent category. Sometime two Months are combined."
+  },
+  {
+    "Done": true,
+    "Text": "Add saving of rules. Maybe time to move to DB. Using Json.Net is a bitch here."
   },
   {
     "Done": true,
@@ -34,10 +38,6 @@
   {
     "Done": true,
     "Text": "Move DataBase to AppData"
-  },
-  {
-    "Done": false,
-    "Text": "Error in X-Axis of statistic of rent category. Sometime two Months are combined."
   },
   {
     "Done": true,

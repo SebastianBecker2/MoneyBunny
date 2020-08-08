@@ -163,15 +163,19 @@ namespace ToDoManager
 
         private void BtnToDoFileSelect_Click(object sender, EventArgs e)
         {
-            using (var dlg = new SaveFileDialog())
+            using (var dlg = new OpenFileDialog())
             {
                 dlg.Title = "ToDoFile";
                 dlg.Filter = "Json|*.json";
+                dlg.CheckFileExists = false;
                 if (dlg.ShowDialog() != DialogResult.OK)
                 {
                     return;
                 }
                 TxtToDoFilePath.Text = dlg.FileName;
+                ToDoFilePath = TxtToDoFilePath.Text;
+                DisplayToDoList(ToDoItems);
+                ApplyFilterToDgv();
             }
         }
     }
