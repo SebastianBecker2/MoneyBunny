@@ -34,7 +34,7 @@ namespace MoneyBunny.DataStore
     public class DataBase
     {
         private static readonly string DataStoreFileName = "DataStore.db";
-        private static string ConnectionString { get => $"URI=file:{DataStoreFileName}"; }
+        private static string ConnectionString { get => $"URI=file:{DataStoreFileName};foreign keys=true"; }
 
         private static bool IsInitialized = false;
 
@@ -47,6 +47,7 @@ namespace MoneyBunny.DataStore
                 CreateTransactionsTable();
                 CreateRulesTable();
             }
+
             var connection = new SQLiteConnection(ConnectionString);
             connection.Open();
             return connection;

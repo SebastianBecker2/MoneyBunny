@@ -1,9 +1,5 @@
 [
   {
-    "Done": true,
-    "Text": "Bug in parsing. Transactions have references of other transactions."
-  },
-  {
     "Done": false,
     "Text": "Make transaction list selection easier."
   },
@@ -32,12 +28,20 @@
     "Text": "Improve Transaction Dgv performance"
   },
   {
-    "Done": false,
+    "Done": true,
     "Text": "Check why Rules are not deleted when Catetories are"
   },
   {
     "Done": false,
     "Text": "Move DataBase to AppData"
+  },
+  {
+    "Done": false,
+    "Text": "Error in X-Axis of statistic of rent category. Sometime two Months are combined."
+  },
+  {
+    "Done": true,
+    "Text": "Bug in parsing. Transactions have references of other transactions."
   },
   {
     "Done": true,
