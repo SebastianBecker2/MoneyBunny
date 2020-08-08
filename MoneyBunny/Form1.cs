@@ -247,6 +247,11 @@ namespace MoneyBunny
                 return;
             }
 
+            if (e.ColumnIndex != 0)
+            {
+                return;
+            }
+
             var cell = DgvTransactions.Rows[e.RowIndex].Cells["DgcSelection"];
 
             var prev = cell.Value != null && (bool)cell.Value;
