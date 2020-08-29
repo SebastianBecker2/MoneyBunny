@@ -35,7 +35,7 @@
             this.BtnClose = new System.Windows.Forms.Button();
             this.DgvStatistic = new System.Windows.Forms.DataGridView();
             this.DgcCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DgcMonthlyAvarage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DgcMonthlyAverage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgcLastMonth = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ChtGraph = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -66,7 +66,7 @@
             this.DgvStatistic.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvStatistic.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.DgcCategory,
-            this.DgcMonthlyAvarage,
+            this.DgcMonthlyAverage,
             this.DgcLastMonth});
             this.DgvStatistic.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.DgvStatistic.Location = new System.Drawing.Point(12, 12);
@@ -86,11 +86,11 @@
             this.DgcCategory.Name = "DgcCategory";
             this.DgcCategory.ReadOnly = true;
             // 
-            // DgcMonthlyAvarage
+            // DgcMonthlyAverage
             // 
-            this.DgcMonthlyAvarage.HeaderText = "Monthly Avarage";
-            this.DgcMonthlyAvarage.Name = "DgcMonthlyAvarage";
-            this.DgcMonthlyAvarage.ReadOnly = true;
+            this.DgcMonthlyAverage.HeaderText = "Monthly Average";
+            this.DgcMonthlyAverage.Name = "DgcMonthlyAverage";
+            this.DgcMonthlyAverage.ReadOnly = true;
             // 
             // DgcLastMonth
             // 
@@ -121,8 +121,8 @@
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series2.LabelFormat = "F2";
             series2.Legend = "Legend1";
-            series2.LegendText = "Overall monthly avarage";
-            series2.Name = "MonthlyAvarage";
+            series2.LegendText = "Overall monthly average";
+            series2.Name = "MonthlyAverage";
             series2.SmartLabelStyle.Enabled = false;
             this.ChtGraph.Series.Add(series1);
             this.ChtGraph.Series.Add(series2);
@@ -164,7 +164,7 @@
         private System.Windows.Forms.Button BtnClose;
         private System.Windows.Forms.DataGridView DgvStatistic;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgcCategory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DgcMonthlyAvarage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DgcMonthlyAverage;
         private System.Windows.Forms.DataGridViewTextBoxColumn DgcLastMonth;
         private System.Windows.Forms.DataVisualization.Charting.Chart ChtGraph;
         private System.Windows.Forms.Panel panel1;

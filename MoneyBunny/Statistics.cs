@@ -39,11 +39,11 @@ namespace MoneyBunny
                 };
                 row.Cells.Add(name);
 
-                var monthly_avarage = new DataGridViewTextBoxCell()
+                var monthly_average = new DataGridViewTextBoxCell()
                 {
-                    Value = CalculateMonthlyAvarage(category.CategoryId.Value).ToValueString(),
+                    Value = CalculateMonthlyAverage(category.CategoryId.Value).ToValueString(),
                 };
-                row.Cells.Add(monthly_avarage);
+                row.Cells.Add(monthly_average);
 
                 var last_month = new DataGridViewTextBoxCell()
                 {
@@ -55,14 +55,28 @@ namespace MoneyBunny
             }
         }
 
-        private int CalculateMonthlyAvarage(long category_id)
+        private double CalculateMonthlyAverage(long category_id)
         {
-            return (int)Transactions
-                .Where(t => t.CategoryId == category_id)
-                .GroupBy(t => new { month = t.Date.Month, year = t.Date.Year })
-                .Select(g => g.Sum(t => t.Value))
-                .DefaultIfEmpty(0)
+            return ToOrderedMonthlySum(Transactions.Where(t => t.CategoryId == category_id))
+                .Select(kvp => kvp.MonthlySum)
                 .Average();
+        }
+
+        private static IEnumerable<(DateTime Month, double MonthlySum)> ToOrderedMonthlySum(IEnumerable<Transaction> transactions)
+        {
+            var monthly_sums = transactions
+                .OrderBy(t => t.Date)
+                .ToLookup(t => t.Date.FirstDayOfMonth(), t => t);
+
+            // Fill in the missing month
+            var first_month = monthly_sums.First().Key;
+            var last_month = monthly_sums.Last().Key;
+            for (var month = first_month;
+                month <= last_month;
+                month = month.AddMonths(1))
+            {
+                yield return (month, monthly_sums[month].Sum(t => t.Value) / 100);
+            }
         }
 
         private int CalculateLastMonth(long category_id)
@@ -82,19 +96,14 @@ namespace MoneyBunny
                 series.Points.Clear();
             }
 
-            var monthly_sums = Transactions
-                .Where(t => t.CategoryId == category_id)
-                .GroupBy(t => t.Date.FirstDayOfMonth())
-                .OrderBy(g => g.Key)
-                .ToDictionary(g => g.Key.ToString("yyyy-MM"),
-                              g => (double)g.Sum(t => t.Value) / 100);
+            var monthly_average = CalculateMonthlyAverage(category_id);
 
-            var monthly_avarage = (double)CalculateMonthlyAvarage(category_id) / 100;
-
-            foreach (var kvp in monthly_sums)
+            foreach (var (month, monthly_sum) in 
+                ToOrderedMonthlySum(Transactions.Where(t => t.CategoryId == category_id)))
             {
-                ChtGraph.Series["MonthlySums"].Points.AddXY(kvp.Key, kvp.Value);
-                ChtGraph.Series["MonthlyAvarage"].Points.AddXY(kvp.Key, monthly_avarage);
+                var time_stamp = month.ToString("yyyy-MM");
+                ChtGraph.Series["MonthlySums"].Points.AddXY(time_stamp, monthly_sum);
+                ChtGraph.Series["MonthlyAverage"].Points.AddXY(time_stamp, monthly_average);
             }
         }
 

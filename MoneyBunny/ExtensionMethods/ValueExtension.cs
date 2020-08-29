@@ -6,5 +6,10 @@
         {
             return string.Format("{0:N2}", (double)value / 100);
         }
+
+        public static string ToValueString(this double value)
+        {
+            return string.Format("{0:N2}", value);
+        }
     }
 }

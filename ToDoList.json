@@ -16,16 +16,12 @@
     "Text": "Change Comparator from enum to class with subclass for IntComparator and StringComparator. (Rule::Comparator should return Comparator)"
   },
   {
-    "Done": true,
-    "Text": "Make ToDo Manager select existing json file"
-  },
-  {
     "Done": false,
     "Text": "Improve Transaction Dgv performance"
   },
   {
-    "Done": false,
-    "Text": "Error in X-Axis of statistic of rent category. Sometime two Months are combined."
+    "Done": true,
+    "Text": "Make ToDo Manager select existing json file"
   },
   {
     "Done": true,
@@ -54,5 +50,9 @@
   {
     "Done": true,
     "Text": "Category filter for 'any'"
+  },
+  {
+    "Done": false,
+    "Text": "Fix MvbParser bug for first month of each year uses the Year of the old balance. Which is from the previous year. So it gets the year of the year wrong. Timestamp from last balance is a bad choice."
   }
 ]
