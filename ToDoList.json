@@ -20,6 +20,22 @@
     "Text": "Improve Transaction Dgv performance"
   },
   {
+    "Done": false,
+    "Text": "Add category rule filter 'does not contain'"
+  },
+  {
+    "Done": false,
+    "Text": "Add progress bar for applying category rules"
+  },
+  {
+    "Done": false,
+    "Text": "Fix ToOrderedMonthlySum crash when no transactions in category"
+  },
+  {
+    "Done": true,
+    "Text": "Fix categories without rules always apply. They should never apply."
+  },
+  {
     "Done": true,
     "Text": "Fix MvbParser bug for first month of each year uses the Year of the old balance. Which is from the previous year. So it gets the year of the year wrong. Timestamp from last balance is a bad choice."
   },

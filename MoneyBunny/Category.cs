@@ -27,7 +27,7 @@ namespace MoneyBunny
 
         public bool ApplyRules(Transaction transaction)
         {
-            if (Rules == null)
+            if (Rules == null || !Rules.Any())
             {
                 return false;
             }
