@@ -12,6 +12,7 @@ namespace MoneyBunny
         private readonly static string PageEnd = "Übertrag auf Blatt";
         private readonly static string PageStart = "Übertrag von Blatt";
         private readonly static string LastPageEnd = "neuer Kontostand vom";
+        private readonly static string YearOfTransactionPrefix = "Kontoauszug";
 
         private int CurrentIndex = 0;
         private int CurrentPage = 0;
@@ -93,6 +94,18 @@ namespace MoneyBunny
             }
         }
 
+        int GetYearOfTransaction()
+        {
+            var prefix_index = FileContent.IndexOf(YearOfTransactionPrefix);
+            prefix_index += YearOfTransactionPrefix.Length;
+            while (FileContent[prefix_index] != '/')
+            {
+                ++prefix_index;
+            }
+            ++prefix_index;
+            return int.Parse(FileContent.Substring(prefix_index, 4));
+        }
+
         static string ParseTransactionType(string text, int index = 0)
         {
             var end_of_type_index = text.IndexOf("PN:", index);
@@ -131,7 +144,6 @@ namespace MoneyBunny
             {
                 var index = FileContent.IndexOf(FirstPageStart, CurrentIndex);
                 index += FirstPageStart.Length;
-                YearOfTransactions = ParseLongDate(FileContent.Substring(index + 1, 10)).Year;
                 while (!char.IsDigit(FileContent[index]))
                 {
                     index = SkipLines(index, 1);
@@ -180,6 +192,8 @@ namespace MoneyBunny
             {
                 return false;
             }
+
+            YearOfTransactions = GetYearOfTransaction();
 
             var first_page_start_pos = FileContent.IndexOf(FirstPageStart);
             if (first_page_start_pos == -1)

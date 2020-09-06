@@ -21,6 +21,10 @@
   },
   {
     "Done": true,
+    "Text": "Fix MvbParser bug for first month of each year uses the Year of the old balance. Which is from the previous year. So it gets the year of the year wrong. Timestamp from last balance is a bad choice."
+  },
+  {
+    "Done": true,
     "Text": "Make ToDo Manager select existing json file"
   },
   {
@@ -50,9 +54,5 @@
   {
     "Done": true,
     "Text": "Category filter for 'any'"
-  },
-  {
-    "Done": false,
-    "Text": "Fix MvbParser bug for first month of each year uses the Year of the old balance. Which is from the previous year. So it gets the year of the year wrong. Timestamp from last balance is a bad choice."
   }
 ]
