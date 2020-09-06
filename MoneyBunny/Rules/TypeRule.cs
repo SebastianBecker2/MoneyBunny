@@ -19,6 +19,8 @@ namespace MoneyBunny.Rules
                 throw new ArgumentNullException(nameof(keywords),
                     "A list of at least one keyword must be provided.");
             }
+
+            Keywords = keywords;
         }
 
         public override bool Apply(Transaction transaction)
