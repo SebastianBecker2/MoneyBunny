@@ -29,7 +29,7 @@
   },
   {
     "Done": false,
-    "Text": "Fix ToOrderedMonthlySum crash when no transactions in category"
+    "Text": "Fix ToOrderedMonthlySum crash when no transactions in category in Statistics"
   },
   {
     "Done": true,
@@ -70,5 +70,9 @@
   {
     "Done": true,
     "Text": "Category filter for 'any'"
+  },
+  {
+    "Done": false,
+    "Text": "Add continuous integration to repository (TravisCI or something)"
   }
 ]
