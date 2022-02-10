@@ -83,7 +83,7 @@ namespace MoneyBunny
         {
             var start_last_month = DateTime.Now.AddMonths(-1).FirstDayOfMonth();
             var end_last_month = DateTime.Now.AddMonths(-1).LastDayOfMonth();
-            return (int)Transactions
+            return Transactions
                 .Where(t => t.Date.IsBetween(start_last_month, end_last_month))
                 .Where(t => t.CategoryId == category_id)
                 .Sum(t => t.Value);

@@ -53,7 +53,7 @@ namespace MoneyBunny.DataStore
             SQLiteCommand command,
             IEnumerable<long> ids)
         {
-            Func<string> id_string = () => string.Join(", ", ids.Select(id => id.ToString()));
+            string id_string() => string.Join(", ", ids.Select(id => id.ToString()));
             switch (filter)
             {
                 case DbFilter.All:
@@ -478,9 +478,8 @@ namespace MoneyBunny.DataStore
             IEnumerable<long> ids = null,
             DbOrder order = DbOrder.None)
         {
-            string statement = "SELECT * FROM Transactions";
             using (var connection = OpenConnection())
-            using (var command = new SQLiteCommand(statement, connection))
+            using (var command = new SQLiteCommand(connection))
             {
                 command.CommandText = "SELECT * FROM Transactions";
                 AddFilter(filter, command, ids);
