@@ -1,16 +1,16 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyBunny", "MoneyBunny\MoneyBunny.csproj", "{BC94C647-B600-4166-B98E-58C91D92BAB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoneyBunny", "MoneyBunny\MoneyBunny.csproj", "{BC94C647-B600-4166-B98E-58C91D92BAB7}"
 	ProjectSection(ProjectDependencies) = postProject
 		{4C9E400C-64A7-4EA1-85B2-7A712108DA20} = {4C9E400C-64A7-4EA1-85B2-7A712108DA20}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoManager", "ToDoManager\ToDoManager.csproj", "{678EBC3A-44FE-4325-85AA-866001164074}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoManager", "ToDoManager\ToDoManager.csproj", "{678EBC3A-44FE-4325-85AA-866001164074}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropDownButton", "DropDownButton\DropDownButton.csproj", "{4C9E400C-64A7-4EA1-85B2-7A712108DA20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DropDownButton", "DropDownButton\DropDownButton.csproj", "{4C9E400C-64A7-4EA1-85B2-7A712108DA20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
