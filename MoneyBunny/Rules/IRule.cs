@@ -1,13 +1,13 @@
-﻿namespace MoneyBunny.Rules
+namespace MoneyBunny.Rules
 {
     public interface IRule
     {
-        long? RuleId { get; }
-        string ComparatorText { get; }
-        string ValueText { get; }
-        RuleType Type { get; }
-        long CategoryId { get; }
+        public long? RuleId { get; }
+        public string ComparatorText { get; }
+        public string ValueText { get; }
+        public RuleType Type { get; }
+        public long CategoryId { get; }
 
-        bool Apply(Transaction transaction);
+        public bool Apply(Transaction transaction);
     }
 }

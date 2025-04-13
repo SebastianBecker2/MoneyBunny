@@ -1,4 +1,4 @@
-﻿namespace ImbaControls
+namespace ImbaControls
 {
 	public class GridView : System.Windows.Forms.DataGridView
 	{
@@ -13,26 +13,26 @@
 		private int MouseDownFirstDisplayedRow { get; set; }
 
 		public new int FirstDisplayedScrollingRowIndex
-		{
-			get { return base.FirstDisplayedScrollingRowIndex; }
-			set
-			{
-				if (value < 0)
-				{
-					base.FirstDisplayedScrollingRowIndex = 0;
-				}
-				else if (value > (this.RowCount - 1))
-				{
-					base.FirstDisplayedScrollingRowIndex = (this.RowCount - 1);
-				}
-				else
-				{
-					base.FirstDisplayedScrollingRowIndex = value;
-				}
-			}
-		}
+        {
+            get => base.FirstDisplayedScrollingRowIndex;
+            set
+            {
+                if (value < 0)
+                {
+                    base.FirstDisplayedScrollingRowIndex = 0;
+                }
+                else if (value > (this.RowCount - 1))
+                {
+                    base.FirstDisplayedScrollingRowIndex = this.RowCount - 1;
+                }
+                else
+                {
+                    base.FirstDisplayedScrollingRowIndex = value;
+                }
+            }
+        }
 
-		[System.ComponentModel.Browsable(true)]
+        [System.ComponentModel.Browsable(true)]
 		[System.ComponentModel.DefaultValue(DefaultVerticalDragScroll)]
 		[System.ComponentModel.Category("Layout")]
 		[System.ComponentModel.Description("Determines if the content should scroll" +
@@ -46,22 +46,19 @@
 		[System.ComponentModel.Description("Sets or gets the current column sort mode.")]
 		[System.ComponentModel.Localizable(false)]
 		public System.Windows.Forms.DataGridViewColumnSortMode ColumnSortMode
-		{
-			get
-			{
-				return m_column_sort_mode;
-			}
-			set
-			{
-				m_column_sort_mode = value;
-				foreach (System.Windows.Forms.DataGridViewColumn column in this.Columns)
-				{
-					column.SortMode = m_column_sort_mode;
-				}
-			}
-		}
+        {
+            get => m_column_sort_mode;
+            set
+            {
+                m_column_sort_mode = value;
+                foreach (System.Windows.Forms.DataGridViewColumn column in this.Columns)
+                {
+                    column.SortMode = m_column_sort_mode;
+                }
+            }
+        }
 
-		public GridView()
+        public GridView()
 		{
 			this.MouseDownOnCell = false;
 			this.VerticalDragScroll = DefaultVerticalDragScroll;
@@ -73,12 +70,9 @@
 			MouseMove += MouseMoveHandler;
 		}
 
-		private void ColumnAddedHandler(object sender, System.Windows.Forms.DataGridViewColumnEventArgs e)
-		{
-			e.Column.SortMode = this.ColumnSortMode;
-		}
+        private void ColumnAddedHandler(object sender, System.Windows.Forms.DataGridViewColumnEventArgs e) => e.Column.SortMode = this.ColumnSortMode;
 
-		private void CellMouseDownHandler(object sender, System.Windows.Forms.DataGridViewCellMouseEventArgs e)
+        private void CellMouseDownHandler(object sender, System.Windows.Forms.DataGridViewCellMouseEventArgs e)
 		{
 			if (!this.VerticalDragScroll) return;
 
@@ -87,17 +81,14 @@
 			this.MouseDownFirstDisplayedRow = this.FirstDisplayedScrollingRowIndex;
 		}
 
-		private void MouseUpHandler(object sender, System.Windows.Forms.MouseEventArgs e)
-		{
-			this.MouseDownOnCell = false;
-		}
+        private void MouseUpHandler(object sender, System.Windows.Forms.MouseEventArgs e) => this.MouseDownOnCell = false;
 
-		private void MouseMoveHandler(object sneder, System.Windows.Forms.MouseEventArgs e)
+        private void MouseMoveHandler(object sneder, System.Windows.Forms.MouseEventArgs e)
 		{
 			if (!this.MouseDownOnCell) return;
 
-			int scroll_offset = (MouseDownPosition - e.Y);
-			int column_offset = scroll_offset / this.Rows[0].Height;
+			var scroll_offset = MouseDownPosition - e.Y;
+			var column_offset = scroll_offset / this.Rows[0].Height;
 			this.FirstDisplayedScrollingRowIndex = MouseDownFirstDisplayedRow + column_offset;
 		}
 
@@ -107,32 +98,14 @@
 			CurrentCell = null;
 		}
 
-		public bool HasRowSelected()
-		{
-			return SelectedRows.Count > 0;
-		}
+        public bool HasRowSelected() => SelectedRows.Count > 0;
 
-		public System.Windows.Forms.DataGridViewRow SelectedRow
-		{
-			get
-			{
-				return SelectedRows[0];
-			}
-		}
+        public System.Windows.Forms.DataGridViewRow SelectedRow => SelectedRows[0];
 
-		public void SelectLastRow()
-		{
-			Rows[Rows.Count - 1].Selected = true;
-		}
+        public void SelectLastRow() => Rows[Rows.Count - 1].Selected = true;
 
-		public void SelectFirstRow()
-		{
-			Rows[0].Selected = true;
-		}
+        public void SelectFirstRow() => Rows[0].Selected = true;
 
-		public void SelectRow(int index)
-		{
-			Rows[index].Selected = true;
-		}
-	}
+        public void SelectRow(int index) => Rows[index].Selected = true;
+    }
 }

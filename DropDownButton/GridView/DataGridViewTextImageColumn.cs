@@ -1,9 +1,9 @@
-﻿using System.Drawing;
-using System.Windows.Forms;
-
 namespace ImbaControls
 {
-	public class DataGridViewTextImageColumn : DataGridViewTextBoxColumn
+    using System.Drawing;
+    using System.Windows.Forms;
+
+    public class DataGridViewTextImageColumn : DataGridViewTextBoxColumn
 	{
 		private Image imageValue;
 		private Size imageSize;
@@ -22,34 +22,26 @@ namespace ImbaControls
 		}
 
 		public Image Image
-		{
-			get { return this.imageValue; }
-			set
-			{
-				if (this.Image != value)
-				{
-					this.imageValue = value;
-					this.imageSize = value.Size;
+        {
+            get => this.imageValue;
+            set
+            {
+                if (this.Image != value)
+                {
+                    this.imageValue = value;
+                    this.imageSize = value.Size;
 
-					if (this.InheritedStyle != null)
-					{
-						Padding inheritedPadding = this.InheritedStyle.Padding;
-						this.DefaultCellStyle.Padding = new Padding(imageSize.Width,
-					 inheritedPadding.Top, inheritedPadding.Right,
-					 inheritedPadding.Bottom);
-					}
-				}
-			}
-		}
+                    if (this.InheritedStyle != null)
+                    {
+                        var inheritedPadding = this.InheritedStyle.Padding;
+                        this.DefaultCellStyle.Padding = new Padding(imageSize.Width,
+                     inheritedPadding.Top, inheritedPadding.Right,
+                     inheritedPadding.Bottom);
+                    }
+                }
+            }
+        }
 
-		private DataGridViewTextImageCell TextAndImageCellTemplate
-		{
-			get { return this.CellTemplate as DataGridViewTextImageCell; }
-		}
-
-		internal Size ImageSize
-		{
-			get { return imageSize; }
-		}
-	}
+        internal Size ImageSize => imageSize;
+    }
 }

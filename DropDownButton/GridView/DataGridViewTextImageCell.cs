@@ -1,9 +1,9 @@
-﻿using System.Drawing;
-using System.Windows.Forms;
-
 namespace ImbaControls
 {
-	public class DataGridViewTextImageCell : DataGridViewTextBoxCell
+    using System.Drawing;
+    using System.Windows.Forms;
+
+    public class DataGridViewTextImageCell : DataGridViewTextBoxCell
 	{
 		private Image imageValue;
 		private Size imageSize;
@@ -81,9 +81,6 @@ namespace ImbaControls
 			}
 		}
 
-		private DataGridViewTextImageColumn OwningTextAndImageColumn
-		{
-			get { return this.OwningColumn as DataGridViewTextImageColumn; }
-		}
-	}
+        private DataGridViewTextImageColumn OwningTextAndImageColumn => this.OwningColumn as DataGridViewTextImageColumn;
+    }
 }

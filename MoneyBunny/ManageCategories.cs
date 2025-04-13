@@ -1,17 +1,17 @@
-﻿using MoneyBunny.DataStore;
-using MoneyBunny.Rules;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
-using Point = System.Drawing.Point;
-
 namespace MoneyBunny
 {
+    using MoneyBunny.DataStore;
+    using MoneyBunny.Rules;
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using System.Linq;
+    using System.Windows.Forms;
+    using Point = System.Drawing.Point;
+
     public partial class ManageCategories : Form
     {
-        public List<Category> DeletedCategories { get; set; } = new List<Category>();
+        public List<Category> DeletedCategories { get; set; } = [];
 
         public ManageCategories()
         {
@@ -52,7 +52,7 @@ namespace MoneyBunny
                 if (row.Tag == null)
                 {
                     DataBase.InsertCategories(
-                        new[] { Category.NewCategory(name) });
+                        [Category.NewCategory(name)]);
                     // Store rules to DB (inserting)
                     continue;
                 }
@@ -63,14 +63,14 @@ namespace MoneyBunny
                 // but got created by adding rules to it.
                 if (!category.CategoryId.HasValue)
                 {
-                    DataBase.InsertCategories(new[] { category });
+                    DataBase.InsertCategories([category]);
                 }
 
                 // Override category name if necessary
                 if (category.Name != name)
                 {
                     category.Name = name;
-                    DataBase.UpdateCategoryName(new[] { category });
+                    DataBase.UpdateCategoryName([category]);
                 }
             }
 
@@ -95,9 +95,9 @@ namespace MoneyBunny
                 {
                     Value = category.Name
                 };
-                row.Cells.Add(name);
+                _ = row.Cells.Add(name);
 
-                DgvCategories.Rows.Add(row);
+                _ = DgvCategories.Rows.Add(row);
             }
         }
 
@@ -114,7 +114,7 @@ namespace MoneyBunny
                 // Remember the point where the mouse down occurred. 
                 // The DragSize indicates the size that the mouse can move 
                 // before a drag event should be started.                
-                Size dragSize = SystemInformation.DragSize;
+                var dragSize = SystemInformation.DragSize;
 
                 // Create a rectangle using the DragSize, with the mouse position being
                 // at the center of the rectangle.
@@ -127,16 +127,13 @@ namespace MoneyBunny
                 dragBoxFromMouseDown = Rectangle.Empty;
         }
 
-        private void DgvCategories_DragOver(object sender, DragEventArgs e)
-        {
-            e.Effect = DragDropEffects.Move;
-        }
+        private void DgvCategories_DragOver(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
 
         private void DgvCategories_DragDrop(object sender, DragEventArgs e)
         {
             // The mouse locations are relative to the screen, so they must be 
             // converted to client coordinates.
-            Point clientPoint = DgvCategories.PointToClient(new Point(e.X, e.Y));
+            var clientPoint = DgvCategories.PointToClient(new Point(e.X, e.Y));
 
             // Get the row index of the item the mouse is below. 
             rowIndexOfItemUnderMouseToDrop =
@@ -145,7 +142,7 @@ namespace MoneyBunny
             // If the drag operation was a move then remove and insert the row.
             if (e.Effect == DragDropEffects.Move)
             {
-                DataGridViewRow rowToMove = e.Data.GetData(
+                var rowToMove = e.Data.GetData(
                     typeof(DataGridViewRow)) as DataGridViewRow;
                 DgvCategories.Rows.RemoveAt(rowIndexFromMouseDown);
                 DgvCategories.Rows.Insert(rowIndexOfItemUnderMouseToDrop, rowToMove);
@@ -162,7 +159,7 @@ namespace MoneyBunny
                 {
 
                     // Proceed with the drag and drop, passing in the list item.                    
-                    DragDropEffects dropEffect = DgvCategories.DoDragDrop(
+                    var dropEffect = DgvCategories.DoDragDrop(
                     DgvCategories.Rows[rowIndexFromMouseDown],
                     DragDropEffects.Move);
                 }
@@ -172,8 +169,8 @@ namespace MoneyBunny
         private void BtnAddCategory_Click(object sender, EventArgs e)
         {
             var row = new DataGridViewRow();
-            row.Cells.Add(new DataGridViewTextBoxCell());
-            DgvCategories.Rows.Add(row);
+            _ = row.Cells.Add(new DataGridViewTextBoxCell());
+            _ = DgvCategories.Rows.Add(row);
         }
 
         private void BtnRemoveCategory_Click(object sender, EventArgs e)
@@ -203,36 +200,34 @@ namespace MoneyBunny
             var row = DgvCategories.SelectedRows[0];
 
 
-            using (var dlg = new ConfigureRules())
+            using var dlg = new ConfigureRules();
+            if (row.Tag == null)
             {
-                if (row.Tag == null)
-                {
-                    var cell = row.Cells["DgcName"] as DataGridViewTextBoxCell;
-                    row.Tag = Category.NewCategory(cell.Value.ToString());
-                }
+                var cell = row.Cells["DgcName"] as DataGridViewTextBoxCell;
+                row.Tag = Category.NewCategory(cell.Value.ToString());
+            }
 
-                var category = (row.Tag as Category);
-                if (category.Rules == null
-                    && category.CategoryId.HasValue)
-                {
-                    category.Rules = DataBase.GetRules(
-                        DbFilter.WhereCategoryId,
-                        new[] { category.CategoryId.Value });
-                }
+            var category = row.Tag as Category;
+            if (category.Rules == null
+                && category.CategoryId.HasValue)
+            {
+                category.Rules = DataBase.GetRules(
+                    DbFilter.WhereCategoryId,
+                    [category.CategoryId.Value]);
+            }
 
-                dlg.Rules = category.Rules;
+            dlg.Rules = category.Rules;
 
-                if (dlg.ShowDialog() != DialogResult.OK)
-                {
-                    return;
-                }
+            if (dlg.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
 
-                category.Rules = dlg.Rules.ToList();
-                if (category.CategoryId.HasValue)
-                {
-                    // Store rules to DB (updating)
-                    DataBase.UpdateCategoryRules(new[] { category });
-                }
+            category.Rules = [.. dlg.Rules];
+            if (category.CategoryId.HasValue)
+            {
+                // Store rules to DB (updating)
+                DataBase.UpdateCategoryRules([category]);
             }
         }
     }

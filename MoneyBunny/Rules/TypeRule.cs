@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
 namespace MoneyBunny.Rules
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class TypeRule : Rule
     {
         public IEnumerable<string> Keywords { get; }
@@ -23,9 +23,6 @@ namespace MoneyBunny.Rules
             Keywords = keywords;
         }
 
-        public override bool Apply(Transaction transaction)
-        {
-            return Keywords.Any(w => transaction.Type.Contains(w));
-        }
+        public override bool Apply(Transaction transaction) => Keywords.Any(w => transaction.Type.Contains(w));
     }
 }

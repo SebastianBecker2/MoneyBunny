@@ -1,10 +1,10 @@
-﻿using System;
-using System.Drawing;
-
 namespace ImbaControls.DropDownButton
 {
-	//[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-	public class Item
+    using System;
+    using System.Drawing;
+
+    //[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+    public class Item
 	{
 		public Image Icon { get; set; }
 		public string Text { get; set; }
@@ -12,17 +12,11 @@ namespace ImbaControls.DropDownButton
 
 		public event EventHandler<ClickedEventArgs> Clicked;
 
-		internal virtual void OnClicked(ClickedEventArgs args)
-		{
-			Clicked?.Invoke(this, args);
-		}
+        internal virtual void OnClicked(ClickedEventArgs args) => Clicked?.Invoke(this, args);
 
-		internal virtual void OnClicked()
-		{
-			OnClicked(new ClickedEventArgs());
-		}
+        internal virtual void OnClicked() => OnClicked(new ClickedEventArgs());
 
-		public Item()
+        public Item()
 		{
 			Main = false;
 		}

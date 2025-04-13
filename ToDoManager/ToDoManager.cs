@@ -1,24 +1,19 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ToDoManager.Properties;
-
 namespace ToDoManager
 {
+    using Newtonsoft.Json;
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.IO;
+    using System.Linq;
+    using System.Windows.Forms;
+    using global::ToDoManager.Properties;
+
     public partial class ToDoManager : Form
     {
-        string ToDoFilePath
+        private static string ToDoFilePath
         {
-            get { return Settings.Default.ToDoFilePath; }
+            get => Settings.Default.ToDoFilePath;
             set
             {
                 Settings.Default.ToDoFilePath = value;
@@ -26,7 +21,7 @@ namespace ToDoManager
             }
         }
 
-        List<ToDoItem> ToDoItems
+        private static List<ToDoItem> ToDoItems
         {
             get
             {
@@ -36,20 +31,18 @@ namespace ToDoManager
                 }
                 catch
                 {
-                    return new List<ToDoItem>();
+                    return [];
                 }
             }
-            set
-            {
-                File.WriteAllText(ToDoFilePath, JsonConvert.SerializeObject(value, Formatting.Indented));
-            }
+
+            set => File.WriteAllText(ToDoFilePath, JsonConvert.SerializeObject(value, Formatting.Indented));
         }
 
         public ToDoManager()
         {
             InitializeComponent();
 
-            ToDoItems ??= new List<ToDoItem>();
+            ToDoItems ??= [];
 
             DgvToDoList.Columns["DgcText"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             DgvToDoList.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
@@ -78,37 +71,33 @@ namespace ToDoManager
                 {
                     Value = item.Done,
                 };
-                row.Cells.Add(chb_cell);
+                _ = row.Cells.Add(chb_cell);
 
                 var text_cell = new DataGridViewTextBoxCell()
                 {
                     Value = item.Text,
                 };
-                row.Cells.Add(text_cell);
+                _ = row.Cells.Add(text_cell);
 
                 var delete_cell = new DataGridViewButtonCell()
                 {
                     Value = "X",
 
                 };
-                row.Cells.Add(delete_cell);
+                _ = row.Cells.Add(delete_cell);
 
-                DgvToDoList.Rows.Add(row);
+                _ = DgvToDoList.Rows.Add(row);
             }
         }
 
-        private List<ToDoItem> GetToDoItemsFromDgv()
-        {
-            return DgvToDoList.Rows
+        private List<ToDoItem> GetToDoItemsFromDgv() => [.. DgvToDoList.Rows
                 .Cast<DataGridViewRow>()
                 .Where(r => !r.IsNewRow)
                 .Select(r => new ToDoItem
                 {
                     Done = (bool)(r.Cells["DgcDone"] as DataGridViewCheckBoxCell).Value,
                     Text = r.Cells["DgcText"].Value as string
-                })
-                .ToList();
-        }
+                })];
 
         private void BtnOkay_Click(object sender, EventArgs e)
         {
@@ -142,10 +131,7 @@ namespace ToDoManager
             DgvToDoList.Rows.RemoveAt(e.RowIndex);
         }
 
-        private void ChbShowCompletedItems_CheckedChanged(object sender, EventArgs e)
-        {
-            ApplyFilterToDgv();
-        }
+        private void ChbShowCompletedItems_CheckedChanged(object sender, EventArgs e) => ApplyFilterToDgv();
 
         private void ApplyFilterToDgv()
         {
@@ -160,20 +146,18 @@ namespace ToDoManager
 
         private void BtnToDoFileSelect_Click(object sender, EventArgs e)
         {
-            using (var dlg = new OpenFileDialog())
+            using var dlg = new OpenFileDialog();
+            dlg.Title = "ToDoFile";
+            dlg.Filter = "Json|*.json";
+            dlg.CheckFileExists = false;
+            if (dlg.ShowDialog() != DialogResult.OK)
             {
-                dlg.Title = "ToDoFile";
-                dlg.Filter = "Json|*.json";
-                dlg.CheckFileExists = false;
-                if (dlg.ShowDialog() != DialogResult.OK)
-                {
-                    return;
-                }
-                TxtToDoFilePath.Text = dlg.FileName;
-                ToDoFilePath = TxtToDoFilePath.Text;
-                DisplayToDoList(ToDoItems);
-                ApplyFilterToDgv();
+                return;
             }
+            TxtToDoFilePath.Text = dlg.FileName;
+            ToDoFilePath = TxtToDoFilePath.Text;
+            DisplayToDoList(ToDoItems);
+            ApplyFilterToDgv();
         }
     }
 }

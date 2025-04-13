@@ -1,8 +1,8 @@
-﻿using System;
-using System.ComponentModel;
-
 namespace MoneyBunny.Rules
 {
+    using System;
+    using System.ComponentModel;
+
     public enum Comparator
 
     {
@@ -13,7 +13,7 @@ namespace MoneyBunny.Rules
         LessThanOrEqual,
     }
 
-    static class ComparatorExtensions
+    internal static class ComparatorExtensions
     {
         public static string ToDisplayString(this Comparator comparator)
         {

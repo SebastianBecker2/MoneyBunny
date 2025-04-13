@@ -1,25 +1,16 @@
-﻿using System;
-
 namespace MoneyBunny.Rules
 {
-    public class DateRule : Rule
+    using System;
+
+    public class DateRule(Comparator comparator, DateTime value) : Rule
     {
-        public Comparator Comparator { get; }
-        public DateTime Value { get; }
+        public Comparator Comparator { get; } = comparator;
+        public DateTime Value { get; } = value;
 
         public override string ComparatorText => Comparator.ToDisplayString();
-        public override string ValueText => Value.ToString("d");
+        public override string ValueText => $"{Value:d}";
         public override RuleType Type => RuleType.Date;
 
-        public DateRule(Comparator comparator, DateTime value)
-        {
-            Comparator = comparator;
-            Value = value;
-        }
-
-        public override bool Apply(Transaction transaction)
-        {
-            return Comparator.Apply(transaction.Date.Date, Value.Date);
-        }
+        public override bool Apply(Transaction transaction) => Comparator.Apply(transaction.Date.Date, Value.Date);
     }
 }

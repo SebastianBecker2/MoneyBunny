@@ -1,20 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using MoneyBunny.Rules;
-using Newtonsoft.Json;
-
 namespace MoneyBunny
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using MoneyBunny.Rules;
+    using Newtonsoft.Json;
+
     public class Category
     {
-        public static Category NewCategory(string name, IEnumerable<IRule> rules = null)
+        public static Category NewCategory(string name, IEnumerable<IRule> rules = null) => new Category()
         {
-            return new Category()
-            {
-                Name = name,
-                Rules = rules,
-            };
-        }
+            Name = name,
+            Rules = rules,
+        };
 
         public long? CategoryId { get; set; }
         public string Name { get; set; }
@@ -35,25 +32,13 @@ namespace MoneyBunny
             return Rules.All(r => r.Apply(transaction));
         }
 
-        public override bool Equals(object obj)
-        {
-            return obj is Category category &&
+        public override bool Equals(object obj) => obj is Category category &&
                    CategoryId == category.CategoryId;
-        }
 
-        public override int GetHashCode()
-        {
-            return 2108858624 + CategoryId.GetHashCode();
-        }
+        public override int GetHashCode() => 2108858624 + CategoryId.GetHashCode();
 
-        public static bool operator ==(Category left, Category right)
-        {
-            return EqualityComparer<Category>.Default.Equals(left, right);
-        }
+        public static bool operator ==(Category left, Category right) => EqualityComparer<Category>.Default.Equals(left, right);
 
-        public static bool operator !=(Category left, Category right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(Category left, Category right) => !(left == right);
     }
 }

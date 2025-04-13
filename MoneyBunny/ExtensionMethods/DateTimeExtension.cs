@@ -1,30 +1,27 @@
-﻿using System;
-
 namespace MoneyBunny.ExtensionMethods
 {
+    using System;
+
     public static class DateTimeExtension
     {
-		public static DateTime FirstDayOfMonth(this DateTime date)
-		{
-			return date.AddDays((date.Day - 1) * -1);
-		}
+        public static DateTime FirstDayOfMonth(this DateTime date) => date.AddDays((date.Day - 1) * -1);
 
-		public static DateTime LastDayOfMonth(this DateTime date)
+        public static DateTime LastDayOfMonth(this DateTime date)
 		{
 			date = date.AddMonths(1);
 			return date.AddDays(date.Day * -1);
 		}
 
-		public static bool IsBetween(this DateTime date, DateTime inclusive_start, DateTime inclusive_end)
+		public static bool IsBetween(this DateTime date, DateTime inclusiveStart, DateTime inclusiveEnd)
         {
-			if (inclusive_start > inclusive_end)
+			if (inclusiveStart > inclusiveEnd)
             {
-				var temp = inclusive_start;
-				inclusive_start = inclusive_end;
-				inclusive_end = temp;
+				var temp = inclusiveStart;
+				inclusiveStart = inclusiveEnd;
+				inclusiveEnd = temp;
             }
 
-			return date >= inclusive_start && date <= inclusive_end;
+			return date >= inclusiveStart && date <= inclusiveEnd;
         }
 	}
 }

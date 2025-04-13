@@ -1,4 +1,4 @@
-﻿namespace MoneyBunny
+namespace MoneyBunny
 {
     partial class Form1
     {
@@ -216,7 +216,7 @@
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
             exitToolStripMenuItem.Text = "Exit";
-            exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
+            exitToolStripMenuItem.Click += ExitToolStripMenuItem_Click;
             // 
             // transactionsToolStripMenuItem
             // 
@@ -230,28 +230,28 @@
             clearAllTransactionsToolStripMenuItem.Name = "clearAllTransactionsToolStripMenuItem";
             clearAllTransactionsToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
             clearAllTransactionsToolStripMenuItem.Text = "Clear all Transactions";
-            clearAllTransactionsToolStripMenuItem.Click += clearAllTransactionsToolStripMenuItem_Click;
+            clearAllTransactionsToolStripMenuItem.Click += ClearAllTransactionsToolStripMenuItem_Click;
             // 
             // removeCategoriesFromTransactionsToolStripMenuItem
             // 
             removeCategoriesFromTransactionsToolStripMenuItem.Name = "removeCategoriesFromTransactionsToolStripMenuItem";
             removeCategoriesFromTransactionsToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
             removeCategoriesFromTransactionsToolStripMenuItem.Text = "Remove Categories from Transactions";
-            removeCategoriesFromTransactionsToolStripMenuItem.Click += removeCategoriesFromTransactionsToolStripMenuItem_Click;
+            removeCategoriesFromTransactionsToolStripMenuItem.Click += RemoveCategoriesFromTransactionsToolStripMenuItem_Click;
             // 
             // applyRulesToUncategorizedTransactionsToolStripMenuItem1
             // 
             applyRulesToUncategorizedTransactionsToolStripMenuItem1.Name = "applyRulesToUncategorizedTransactionsToolStripMenuItem1";
             applyRulesToUncategorizedTransactionsToolStripMenuItem1.Size = new System.Drawing.Size(296, 22);
             applyRulesToUncategorizedTransactionsToolStripMenuItem1.Text = "Apply Rules to uncategorized Transactions";
-            applyRulesToUncategorizedTransactionsToolStripMenuItem1.Click += applyRulesToUncategorizedTransactionsToolStripMenuItem1_Click;
+            applyRulesToUncategorizedTransactionsToolStripMenuItem1.Click += ApplyRulesToUncategorizedTransactionsToolStripMenuItem1_Click;
             // 
             // applyRulesToAllTransactionsToolStripMenuItem
             // 
             applyRulesToAllTransactionsToolStripMenuItem.Name = "applyRulesToAllTransactionsToolStripMenuItem";
             applyRulesToAllTransactionsToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
             applyRulesToAllTransactionsToolStripMenuItem.Text = "Apply Rules to all Transactions";
-            applyRulesToAllTransactionsToolStripMenuItem.Click += applyRulesToAllTransactionsToolStripMenuItem_Click;
+            applyRulesToAllTransactionsToolStripMenuItem.Click += ApplyRulesToAllTransactionsToolStripMenuItem_Click;
             // 
             // BtnStatistics
             // 

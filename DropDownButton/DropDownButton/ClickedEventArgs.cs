@@ -1,6 +1,6 @@
-﻿using System;
-
 namespace ImbaControls.DropDownButton
 {
-	public class ClickedEventArgs : EventArgs { }
+    using System;
+
+    public class ClickedEventArgs : EventArgs { }
 }

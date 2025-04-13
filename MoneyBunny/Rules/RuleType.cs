@@ -1,11 +1,11 @@
-﻿using MoneyBunny.ExtensionMethods;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-
 namespace MoneyBunny.Rules
 {
+    using MoneyBunny.ExtensionMethods;
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+
     public enum RuleType
     {
         Reference,
@@ -14,7 +14,7 @@ namespace MoneyBunny.Rules
         Type,
     }
 
-    static class RuleTypesExtensions
+    internal static class RuleTypesExtensions
     {
         public static string ToDisplayString(this RuleType type)
         {
@@ -76,12 +76,12 @@ namespace MoneyBunny.Rules
 
             if (type == RuleType.Reference)
             {
-                return new []{ "Contains any" };
+                return ["Contains any"];
             }
 
             if (type == RuleType.Type)
             {
-                return new[] { "Contains any" };
+                return ["Contains any"];
             }
 
             throw new InvalidEnumArgumentException(

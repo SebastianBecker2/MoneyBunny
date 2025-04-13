@@ -1,13 +1,13 @@
-﻿using MoneyBunny.ExtensionMethods;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Windows.Forms;
-using ImbaControls.DropDownButton;
-
 namespace MoneyBunny.Rules
 {
+    using MoneyBunny.ExtensionMethods;
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Linq;
+    using System.Windows.Forms;
+    using ImbaControls.DropDownButton;
+
     public partial class ConfigureRules : Form
     {
         public IEnumerable<IRule> Rules { get; set; }
@@ -43,15 +43,15 @@ namespace MoneyBunny.Rules
             {
                 Value = type.ToDisplayString(),
             };
-            row.Cells.Add(type_text);
+            _ = row.Cells.Add(type_text);
 
             var comparator = new DataGridViewComboBoxCell();
-            comparator.Items.AddRange(type.GetComparators().ToArray());
+            comparator.Items.AddRange([.. type.GetComparators()]);
             comparator.Value = comparator.Items[0];
-            row.Cells.Add(comparator);
+            _ = row.Cells.Add(comparator);
 
             var values = new DataGridViewTextBoxCell();
-            row.Cells.Add(values);
+            _ = row.Cells.Add(values);
 
             return row;
         }
@@ -67,7 +67,7 @@ namespace MoneyBunny.Rules
             {
                 var row = CreateRow(rule.Type);
 
-                DgvRules.Rows.Add(row);
+                _ = DgvRules.Rows.Add(row);
 
                 row.Cells["DgcComparator"].Value = rule.ComparatorText;
                 row.Cells["DgcValues"].Value = rule.ValueText;
@@ -84,9 +84,7 @@ namespace MoneyBunny.Rules
             DgvRules.Rows.Remove(DgvRules.SelectedRows[0]);
         }
 
-        private IEnumerable<IRule> GetRulesFromDisplay()
-        {
-            return DgvRules.Rows
+        private IEnumerable<IRule> GetRulesFromDisplay() => DgvRules.Rows
                 .Cast<DataGridViewRow>()
                 .Select(r =>
                 {
@@ -95,7 +93,6 @@ namespace MoneyBunny.Rules
                     var value = r.Cells["DgcValues"].Value.ToString();
                     return Rule.CreateRule(type, comparator, value);
                 });
-        }
 
         private void BtnOkay_Click(object sender, EventArgs e)
         {

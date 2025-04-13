@@ -1,27 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
-using Toxy;
-using Toxy.Parsers;
-using MoneyBunny.Properties;
-using MoneyBunny.ExtensionMethods;
-using MoneyBunny.DataStore;
-
 namespace MoneyBunny
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Windows.Forms;
+    using Toxy;
+    using Toxy.Parsers;
+    using MoneyBunny.Properties;
+    using MoneyBunny.ExtensionMethods;
+    using MoneyBunny.DataStore;
+
     public partial class Form1 : Form
     {
-        public string BankStatementFolder
+        public static string BankStatementFolder
         {
-            get
-            { return Settings.Default.BankStatementFolder; }
+            get => Settings.Default.BankStatementFolder;
             set
             {
-                Settings.Default.BankStatementFolder = value; Settings.Default.Save();
+                Settings.Default.BankStatementFolder = value;
+                Settings.Default.Save();
             }
         }
 
@@ -33,7 +33,7 @@ namespace MoneyBunny
             UpdateTransactions();
         }
 
-        private string GetTextFromPdf(string file_path)
+        private static string GetTextFromPdf(string file_path)
         {
             var context = new ParserContext(file_path);
             var parser = new PDFTextParser(context);
@@ -66,14 +66,14 @@ namespace MoneyBunny
                 {
                     Debug.Print("Error parsing file");
                 }
-                Debug.Print("Found " + parser.Transactions.Count.ToString() + " Transaction");
+                Debug.Print($"Found {parser.Transactions.Count} Transaction");
 
                 var current_transactions = DataBase.GetTransactions().ToHashSet();
                 var new_transactions = parser.Transactions
                     .Where(t => !current_transactions.Contains(t));
 
                 // ToList() to force the evaluation of the returned IEnumerable
-                ApplyRules(new_transactions).ToList();
+                _ = ApplyRules(new_transactions).ToList();
                 DataBase.InsertTransactions(new_transactions);
             }
 
@@ -86,7 +86,7 @@ namespace MoneyBunny
 
             (var filter, var category) = GetCategoryFilter();
 
-            IEnumerable<long> ids = new[] { category?.CategoryId }
+            var ids = new[] { category?.CategoryId }
                 .Where(id => id != null)
                 .Cast<long>();
 
@@ -96,31 +96,31 @@ namespace MoneyBunny
                 var row = new DataGridViewRow();
 
                 var selection = new DataGridViewCheckBoxCell();
-                row.Cells.Add(selection);
+                _ = row.Cells.Add(selection);
 
                 var date = new DataGridViewTextBoxCell()
                 {
-                    Value = transaction.Date.ToString("d")
+                    Value = $"{transaction.Date:d}"
                 };
-                row.Cells.Add(date);
+                _ = row.Cells.Add(date);
 
                 var type = new DataGridViewTextBoxCell()
                 {
                     Value = transaction.Type
                 };
-                row.Cells.Add(type);
+                _ = row.Cells.Add(type);
 
                 var reference = new DataGridViewTextBoxCell()
                 {
                     Value = transaction.Reference
                 };
-                row.Cells.Add(reference);
+                _ = row.Cells.Add(reference);
 
                 var value = new DataGridViewTextBoxCell()
                 {
                     Value = transaction.Value.ToValueString()
                 };
-                row.Cells.Add(value);
+                _ = row.Cells.Add(value);
 
                 var category_cell = new DataGridViewTextBoxCell();
                 if (filter == DbFilter.WhereCategoryId)
@@ -132,28 +132,26 @@ namespace MoneyBunny
                 {
                     category_cell.Value = DataBase.GetCategories(
                         DbFilter.WhereCategoryId,
-                        new[] { transaction.CategoryId.Value }
+                        [transaction.CategoryId.Value]
                         ).FirstOrDefault()?.Name;
                 }
                 ;
-                row.Cells.Add(category_cell);
+                _ = row.Cells.Add(category_cell);
 
                 row.Tag = transaction;
 
-                DgvTransactions.Rows.Add(row);
+                _ = DgvTransactions.Rows.Add(row);
             }
         }
 
         private void BtnManageCategories_Click(object sender, EventArgs e)
         {
-            using (var dlg = new ManageCategories())
+            using var dlg = new ManageCategories();
+            if (dlg.ShowDialog() != DialogResult.OK)
             {
-                if (dlg.ShowDialog() != DialogResult.OK)
-                {
-                    return;
-                }
-                UpdateCategories();
+                return;
             }
+            UpdateCategories();
         }
 
         private Category GetCategorySelection()
@@ -192,7 +190,7 @@ namespace MoneyBunny
             var categories = DataBase.GetCategories().ToList();
 
             CmbCategorySelection.Items.Clear();
-            CmbCategorySelection.Items.AddRange(categories.Select(c => c.Name).ToArray());
+            CmbCategorySelection.Items.AddRange([.. categories.Select(c => c.Name)]);
             CmbCategorySelection.Tag = categories;
             if (CmbCategorySelection.Items.Count > 0)
             {
@@ -200,9 +198,9 @@ namespace MoneyBunny
             }
 
             CmbCategoryFilter.Items.Clear();
-            CmbCategoryFilter.Items.Add("Any");
-            CmbCategoryFilter.Items.Add("Uncategorized");
-            CmbCategoryFilter.Items.AddRange(categories.Select(c => c.Name).ToArray());
+            _ = CmbCategoryFilter.Items.Add("Any");
+            _ = CmbCategoryFilter.Items.Add("Uncategorized");
+            CmbCategoryFilter.Items.AddRange([.. categories.Select(c => c.Name)]);
             CmbCategoryFilter.Tag = categories;
             CmbCategoryFilter.SelectedIndex = 0;
         }
@@ -242,40 +240,27 @@ namespace MoneyBunny
             DgvTransactions.Rows[e.RowIndex].Cells["DgcSelection"].Value = !prev;
         }
 
-        private void CmbCategoryFilter_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdateTransactions();
-        }
+        private void CmbCategoryFilter_SelectedIndexChanged(object sender, EventArgs e) => UpdateTransactions();
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e) => Close();
 
-        private void clearAllTransactionsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            DataBase.ClearTransactions();
-        }
+        private void ClearAllTransactionsToolStripMenuItem_Click(object sender, EventArgs e) => DataBase.ClearTransactions();
 
         private void BtnStatistics_Click(object sender, EventArgs e)
         {
-            using (var dlg = new Statistics())
-            {
-                dlg.Transactions = DataBase.GetTransactions();
-                dlg.Categories = DataBase.GetCategories();
-                dlg.ShowDialog();
-            }
+            using var dlg = new Statistics();
+            dlg.Transactions = DataBase.GetTransactions();
+            dlg.Categories = DataBase.GetCategories();
+            _ = dlg.ShowDialog();
         }
 
         private void BtnToDoList_Click(object sender, EventArgs e)
         {
-            using (var dlg = new ToDoManager.ToDoManager())
-            {
-                dlg.ShowDialog();
-            }
+            using var dlg = new ToDoManager.ToDoManager();
+            _ = dlg.ShowDialog();
         }
 
-        private void removeCategoriesFromTransactionsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RemoveCategoriesFromTransactionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var transactions = DataBase.GetTransactions()
                 .Select(t =>
@@ -287,7 +272,7 @@ namespace MoneyBunny
             DataBase.UpdateTransactionCategories(transactions);
         }
 
-        private IEnumerable<Transaction> ApplyRules(IEnumerable<Transaction> transactions)
+        private static IEnumerable<Transaction> ApplyRules(IEnumerable<Transaction> transactions)
         {
             foreach (var transaction in transactions)
             {
@@ -295,7 +280,7 @@ namespace MoneyBunny
                 {
                     category.Rules = DataBase.GetRules(
                         DbFilter.WhereCategoryId,
-                        new[] { category.CategoryId.Value });
+                        [category.CategoryId.Value]);
 
                     if (category.Rules == null)
                     {
@@ -311,23 +296,20 @@ namespace MoneyBunny
             }
         }
 
-        private void applyRulesToUncategorizedTransactionsToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void ApplyRulesToUncategorizedTransactionsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             var transactions = ApplyRules(DataBase.GetTransactions(DbFilter.WhereNoCategory));
             DataBase.UpdateTransactionCategories(transactions);
             UpdateTransactions();
         }
 
-        private void applyRulesToAllTransactionsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ApplyRulesToAllTransactionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var transactions = ApplyRules(DataBase.GetTransactions());
             DataBase.UpdateTransactionCategories(transactions);
             UpdateTransactions();
         }
 
-        private void TxtReferenceFilter_TextChanged(object sender, EventArgs e)
-        {
-            UpdateTransactions();
-        }
+        private void TxtReferenceFilter_TextChanged(object sender, EventArgs e) => UpdateTransactions();
     }
 }

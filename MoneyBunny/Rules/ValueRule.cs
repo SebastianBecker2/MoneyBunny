@@ -1,7 +1,7 @@
-﻿using MoneyBunny.ExtensionMethods;
-
 namespace MoneyBunny.Rules
 {
+    using MoneyBunny.ExtensionMethods;
+
     public class ValueRule : Rule
     {
         public Comparator Comparator { get; }
@@ -18,9 +18,6 @@ namespace MoneyBunny.Rules
             Value = value;
         }
 
-        public override bool Apply(Transaction transaction)
-        {
-            return Comparator.Apply(transaction.Value, Value);
-        }
+        public override bool Apply(Transaction transaction) => Comparator.Apply(transaction.Value, Value);
     }
 }

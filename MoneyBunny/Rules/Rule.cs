@@ -1,9 +1,10 @@
-﻿using System;
-using System.ComponentModel;
-using System.Linq;
-
 namespace MoneyBunny.Rules
 {
+    using System;
+    using System.ComponentModel;
+    using System.Globalization;
+    using System.Linq;
+
     public abstract class Rule : IRule
     {
         public long? RuleId { get; set; }
@@ -15,21 +16,21 @@ namespace MoneyBunny.Rules
 
         public abstract bool Apply(Transaction transaction);
 
-        public static IRule CreateRule(string type_text, string comparator_text, string values)
+        public static IRule CreateRule(string typeText, string comparatorText, string values)
         {
-            var type = type_text.ToRuleType();
+            var type = typeText.ToRuleType();
             if (type == RuleType.Date)
             {
                 return new DateRule(
-                    comparator_text.ToComparator(),
-                    DateTime.Parse(values));
+                    comparatorText.ToComparator(),
+                    DateTime.Parse(values, CultureInfo.InvariantCulture));
             }
 
             if (type == RuleType.Value)
             {
                 return new ValueRule(
-                    comparator_text.ToComparator(),
-                    (int)double.Parse(values) * 100);
+                    comparatorText.ToComparator(),
+                    (int)double.Parse(values, CultureInfo.InvariantCulture) * 100);
             }
 
             if (type == RuleType.Reference)

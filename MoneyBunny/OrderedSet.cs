@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
 namespace MoneyBunny
 {
+    using System.Collections;
+    using System.Collections.Generic;
+
     public class OrderedSet<T> : ICollection<T>
     {
         private readonly IDictionary<T, LinkedListNode<T>> m_Dictionary;
@@ -23,15 +23,12 @@ namespace MoneyBunny
 
         public virtual bool IsReadOnly => m_Dictionary.IsReadOnly;
 
-        void ICollection<T>.Add(T item)
-        {
-            Add(item);
-        }
+        void ICollection<T>.Add(T item) => Add(item);
 
         public bool Add(T item)
         {
             if (m_Dictionary.ContainsKey(item)) return false;
-            LinkedListNode<T> node = m_LinkedList.AddLast(item);
+            var node = m_LinkedList.AddLast(item);
             m_Dictionary.Add(item, node);
             return true;
         }
@@ -44,31 +41,19 @@ namespace MoneyBunny
 
         public bool Remove(T item)
         {
-            bool found = m_Dictionary.TryGetValue(item, out LinkedListNode<T> node);
+            var found = m_Dictionary.TryGetValue(item, out var node);
             if (!found) return false;
-            m_Dictionary.Remove(item);
+            _ = m_Dictionary.Remove(item);
             m_LinkedList.Remove(node);
             return true;
         }
 
-        public IEnumerator<T> GetEnumerator()
-        {
-            return m_LinkedList.GetEnumerator();
-        }
+        public IEnumerator<T> GetEnumerator() => m_LinkedList.GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        public bool Contains(T item)
-        {
-            return m_Dictionary.ContainsKey(item);
-        }
+        public bool Contains(T item) => m_Dictionary.ContainsKey(item);
 
-        public void CopyTo(T[] array, int arrayIndex)
-        {
-            m_LinkedList.CopyTo(array, arrayIndex);
-        }
+        public void CopyTo(T[] array, int arrayIndex) => m_LinkedList.CopyTo(array, arrayIndex);
     }
 }

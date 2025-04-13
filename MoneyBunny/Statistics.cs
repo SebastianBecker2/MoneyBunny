@@ -1,21 +1,18 @@
-﻿using MoneyBunny.ExtensionMethods;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Windows.Forms;
-
 namespace MoneyBunny
 {
+    using MoneyBunny.ExtensionMethods;
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Linq;
+    using System.Windows.Forms;
+
     public partial class Statistics : Form
     {
         public IEnumerable<Transaction> Transactions { get; set; }
         public IEnumerable<Category> Categories { get; set; }
 
-        public Statistics()
-        {
-            InitializeComponent();
-        }
+        public Statistics() => InitializeComponent();
 
         protected override void OnLoad(EventArgs e)
         {
@@ -37,30 +34,26 @@ namespace MoneyBunny
                 {
                     Value = category.Name,
                 };
-                row.Cells.Add(name);
+                _ = row.Cells.Add(name);
 
                 var monthly_average = new DataGridViewTextBoxCell()
                 {
                     Value = CalculateMonthlyAverage(category.CategoryId.Value).ToValueString(),
                 };
-                row.Cells.Add(monthly_average);
+                _ = row.Cells.Add(monthly_average);
 
                 var last_month = new DataGridViewTextBoxCell()
                 {
                     Value = CalculateLastMonth(category.CategoryId.Value).ToValueString(),
                 };
-                row.Cells.Add(last_month);
+                _ = row.Cells.Add(last_month);
 
-                DgvStatistic.Rows.Add(row);
+                _ = DgvStatistic.Rows.Add(row);
             }
         }
 
-        private double CalculateMonthlyAverage(long category_id)
-        {
-            return ToOrderedMonthlySum(Transactions.Where(t => t.CategoryId == category_id))
-                .Select(kvp => kvp.MonthlySum)
-                .Average();
-        }
+        private double CalculateMonthlyAverage(long category_id) => ToOrderedMonthlySum(Transactions.Where(t => t.CategoryId == category_id))
+                .Average(kvp => kvp.MonthlySum);
 
         private static IEnumerable<(DateTime Month, double MonthlySum)> ToOrderedMonthlySum(IEnumerable<Transaction> transactions)
         {
@@ -98,12 +91,12 @@ namespace MoneyBunny
 
             var monthly_average = CalculateMonthlyAverage(category_id);
 
-            foreach (var (month, monthly_sum) in 
+            foreach (var (month, monthly_sum) in
                 ToOrderedMonthlySum(Transactions.Where(t => t.CategoryId == category_id)))
             {
-                var time_stamp = month.ToString("yyyy-MM");
-                ChtGraph.Series["MonthlySums"].Points.AddXY(time_stamp, monthly_sum);
-                ChtGraph.Series["MonthlyAverage"].Points.AddXY(time_stamp, monthly_average);
+                var time_stamp = $"{month:yyyy-MM}";
+                _ = ChtGraph.Series["MonthlySums"].Points.AddXY(time_stamp, monthly_sum);
+                _ = ChtGraph.Series["MonthlyAverage"].Points.AddXY(time_stamp, monthly_average);
             }
         }
 
