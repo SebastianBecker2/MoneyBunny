@@ -49,10 +49,7 @@ namespace ToDoManager
         {
             InitializeComponent();
 
-            if (ToDoItems == null)
-            {
-                ToDoItems = new List<ToDoItem>();
-            }
+            ToDoItems ??= new List<ToDoItem>();
 
             DgvToDoList.Columns["DgcText"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             DgvToDoList.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
