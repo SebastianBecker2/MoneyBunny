@@ -8,16 +8,10 @@ namespace MoneyBunny
 {
     class MvbParser
     {
-        private readonly static string FirstPageStart = "alter Kontostand vom";
-        private readonly static string PageEnd = "Übertrag auf Blatt";
-        private readonly static string PageStart = "Übertrag von Blatt";
-        private readonly static string LastPageEnd = "neuer Kontostand vom";
         private readonly static string YearOfTransactionPrefix = "Kontoauszug";
 
         private int CurrentIndex = 0;
-        private int CurrentPage = 0;
         private string FileContent;
-        private int PageCount = 0;
 
         private int YearOfTransactions;
 
@@ -138,54 +132,6 @@ namespace MoneyBunny
             }
         }
 
-        int GetStartOfPage()
-        {
-            if (CurrentPage == 0)
-            {
-                var index = FileContent.IndexOf(FirstPageStart, CurrentIndex);
-                index += FirstPageStart.Length;
-                while (!char.IsDigit(FileContent[index]))
-                {
-                    index = SkipLines(index, 1);
-                }
-                return index;
-            }
-            else
-            {
-                var index = FileContent.IndexOf(PageStart, CurrentIndex) + PageStart.Length + 2;
-
-                var index_after_carryover = SkipLines(index, 1);
-                var value = ParseValue(FileContent.Substring(index, index_after_carryover - index));
-
-                if (Carryover[CurrentPage - 1] != value)
-                {
-                    throw new Exception("Carryover-Check failed on Page: " + CurrentPage + 1);
-                }
-
-                return index_after_carryover;
-            }
-        }
-
-        int GetEndOfPage()
-        {
-            if (CurrentPage == PageCount - 1)
-            {
-                return FileContent.IndexOf(LastPageEnd, CurrentIndex);
-            }
-            else
-            {
-                var index = FileContent.IndexOf(PageEnd, CurrentIndex);
-                var index_before_carryover = index + PageEnd.Length + 2;
-
-                var index_after_carryover = SkipLines(index_before_carryover, 1);
-                var value_text = FileContent.Substring(index_before_carryover, index_after_carryover - index_before_carryover);
-
-                Carryover[CurrentPage] = ParseValue(value_text);
-
-                return index;
-            }
-        }
-
         public bool Parse()
         {
             if (string.IsNullOrWhiteSpace(FileContent))
@@ -195,34 +141,22 @@ namespace MoneyBunny
 
             YearOfTransactions = GetYearOfTransaction();
 
-            var first_page_start_pos = FileContent.IndexOf(FirstPageStart);
-            if (first_page_start_pos == -1)
-            {
-                return false;
-            }
 
-            var last_page_end_pos = FileContent.IndexOf(LastPageEnd);
-            if (last_page_end_pos == -1)
-            {
-                return false;
-            }
+            string mainPattern = @"^\d{2}\.\d{2}\. \d{2}\.\d{2}\. .*,\d{2} [HS]";
+            string indentPattern = @"^ {14,}";
+            string excludePattern = @"^\s*(Übertrag (auf|von) Blatt|neuer Kontostand vom)";
 
-            PageCount = Regex.Matches(FileContent, PageEnd).Count + 1;
 
-            var transactions = "";
+            var lines = FileContent.Split(["\r\n", "\n"], StringSplitOptions.None);
 
-            foreach (var page in Enumerable.Range(0, PageCount))
-            {
-                CurrentPage = page;
-                CurrentIndex = GetStartOfPage();
-                var end_of_page_pos = GetEndOfPage();
+            var filtered = lines
+                .Where(line =>
+                    Regex.IsMatch(line, mainPattern) ||
+                    (Regex.IsMatch(line, indentPattern) && !Regex.IsMatch(line, excludePattern)))
+                .ToList();
 
-                transactions += FileContent.Substring(CurrentIndex, end_of_page_pos - CurrentIndex);
-                transactions = transactions.Trim(' ');
+            ParseTransactions(string.Join("\r\n", filtered));
 
-            }
-
-            ParseTransactions(transactions);
             return true;
         }
     }
