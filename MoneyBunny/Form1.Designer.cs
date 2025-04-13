@@ -53,6 +53,9 @@
             applyRulesToAllTransactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             BtnStatistics = new System.Windows.Forms.Button();
             BtnToDoList = new System.Windows.Forms.Button();
+            label1 = new System.Windows.Forms.Label();
+            TxtReferenceFilter = new System.Windows.Forms.TextBox();
+            label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)DgvTransactions).BeginInit();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -184,7 +187,7 @@
             // 
             label2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(802, 35);
+            label2.Location = new System.Drawing.Point(13, 34);
             label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(36, 15);
@@ -274,11 +277,44 @@
             BtnToDoList.UseVisualStyleBackColor = true;
             BtnToDoList.Click += BtnToDoList_Click;
             // 
+            // label1
+            // 
+            label1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(780, 34);
+            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(58, 15);
+            label1.TabIndex = 16;
+            label1.Text = "Category:";
+            // 
+            // TxtReferenceFilter
+            // 
+            TxtReferenceFilter.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            TxtReferenceFilter.Location = new System.Drawing.Point(385, 31);
+            TxtReferenceFilter.Name = "TxtReferenceFilter";
+            TxtReferenceFilter.Size = new System.Drawing.Size(388, 23);
+            TxtReferenceFilter.TabIndex = 17;
+            TxtReferenceFilter.TextChanged += TxtReferenceFilter_TextChanged;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(316, 34);
+            label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(62, 15);
+            label3.TabIndex = 18;
+            label3.Text = "Reference:";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1115, 606);
+            Controls.Add(label3);
+            Controls.Add(TxtReferenceFilter);
+            Controls.Add(label1);
             Controls.Add(BtnToDoList);
             Controls.Add(BtnStatistics);
             Controls.Add(label2);
@@ -325,6 +361,9 @@
         private System.Windows.Forms.ToolStripMenuItem removeCategoriesFromTransactionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem applyRulesToUncategorizedTransactionsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem applyRulesToAllTransactionsToolStripMenuItem;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox TxtReferenceFilter;
+        private System.Windows.Forms.Label label3;
     }
 }
 

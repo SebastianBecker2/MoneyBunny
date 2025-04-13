@@ -91,7 +91,7 @@ namespace MoneyBunny
                 .Cast<long>();
 
             var order = DbOrder.ByDateDescending;
-            foreach (var transaction in DataBase.GetTransactions(filter, ids, order))
+            foreach (var transaction in DataBase.GetTransactions(filter, ids, order).Where(t => t.Reference.Contains(TxtReferenceFilter.Text)))
             {
                 var row = new DataGridViewRow();
 
@@ -134,7 +134,8 @@ namespace MoneyBunny
                         DbFilter.WhereCategoryId,
                         new[] { transaction.CategoryId.Value }
                         ).FirstOrDefault()?.Name;
-                };
+                }
+                ;
                 row.Cells.Add(category_cell);
 
                 row.Tag = transaction;
@@ -321,6 +322,11 @@ namespace MoneyBunny
         {
             var transactions = ApplyRules(DataBase.GetTransactions());
             DataBase.UpdateTransactionCategories(transactions);
+            UpdateTransactions();
+        }
+
+        private void TxtReferenceFilter_TextChanged(object sender, EventArgs e)
+        {
             UpdateTransactions();
         }
     }
