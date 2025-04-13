@@ -6,7 +6,7 @@ namespace MoneyBunny
     using System.Linq;
     using System.Text.RegularExpressions;
 
-    internal class MvbParser(string file_content)
+    internal sealed class MvbParser(string file_content)
     {
         private static readonly string YearOfTransactionPrefix = "Kontoauszug";
         private int yearOfTransactions;
