@@ -41,21 +41,6 @@ namespace MoneyBunny
             return content.Replace("\n", "\r\n");
         }
 
-        private void BtnSelectFile_Click(object sender, EventArgs e)
-        {
-            using (var dlg = new OpenFileDialog())
-            {
-                dlg.InitialDirectory = BankStatementFolder;
-                dlg.Filter = "PDF|*.pdf";
-                if (dlg.ShowDialog() != DialogResult.OK)
-                {
-                    return;
-                }
-                TxtFilePath.Text = dlg.FileName;
-                BankStatementFolder = Path.GetDirectoryName(dlg.FileName);
-            }
-        }
-
         private void BtnImportAndProcess_Click(object sender, EventArgs e)
         {
             string[] file_paths;
